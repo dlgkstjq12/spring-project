@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
+<mapper namespace="product">
+<insert id="insert">
+(seq_product.nextval, #{product_name}, #{price},
+#{description}, #{picture_url} )
+<!-- seq_product.nextval은 상품코드를 시퀀스를 이용해서 발급하는 것. -->
+<!-- 그러니까 상품이 하나씩 추가될때마다 카운터가 하나씩 올라간다는 뜻이다. -->
+</insert>
+
+<update id = "update_product">
+update product
+set product_name = #{product_name},
+	price=#{price}, description=#{description},
+	picture_url=#{picture_url}
+	where product_id=#{product_id}
+	<!-- 상품 id와 맞는 상품의 가격, 설명, 사진을 갱신하는 쿼리문 -->
+</update>
+
+<delete id = "product_delete">
+	delete from product where product_id=#{product_id}
+	<!-- product테이블안에 있는 상품번호가 ?인 객체를 삭제하는 쿼리문 -->	
+</delete>
+
+
+
+<select id = "file_info" resultType="String">
+	select picture_url from product
+	where product_id=#{product_id}
+	<!-- product테이블안에 있는 입력된 id에 해당하는 이미지를 검색하는 쿼리문  -->
+</select>
+</mapper>

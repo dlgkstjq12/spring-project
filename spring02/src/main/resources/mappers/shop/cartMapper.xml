@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
+<mapper namespace="cart">
+<!-- 장바구니에 담기 -->
+	<insert id="insert">
+		insert into cart (cart_id, userid, product_id, amount)
+		values 
+		  (seq_cart.nextval, #{userid}, #{product_id}, #{amount} )
+	</insert>
+	
+	<select id="listCart" resultType="com.example.spring02.model.shop.dto.CartDTO">
+	<!-- DAO에서 listCart라는 태그로 인해 실행되고 결과타입은 DTO타입으로 한다. (다른계층으로 보내기 위해서) -->
+	
+		select cart_id, p.product_id, c.userid, name, product_name, amount, price, (price*amount) money
+		<!-- 장바구니의 번호, 상품 번호, 회원번호, 회원이름, 상품이름, 상품의양, 상품1개의 가격, 상품의 전체가격을 검색한다.-->
+		
+		from member m, cart c, product p
+		<!-- 회원테이블과, 장바구니 테이블과, 상품테이블로 부터 -->
+		
+		where m.userid=c.userid and c.product_id=p.product_id and c.userid=#{userid} order by cart_id
+		<!--회원테이블의 회원번호와 장바구니테이블의 회원번호가 같고, 장바구니의 상품번호와 상품테이블의 상품번호가 같고, 장바구니테이블의 회원번호가  장바구니에 저장되있는 회원번호와 같을때-->
+		<!-- 장바구니에 관한 정보를 담은 sql문이다. -->
+					
+	</select>
+	
+	<select id="sumMoney" resultType="int">
+		select nvl(sum(price*amount),0) 
+		<!--금액과 상품갯수를 곱한값과 0을더해서 0이 나오는 것을 검색한다. -->
+		<!--그러니까 아무것도 담지 않았을때를 확인하는 것이다. -->
+		
+		from cart c,product p
+		<!-- 장바구니 테이블과 상품 테이블로 부터 -->
+		
+		where c.product_id=p.product_id and userid=#{userid}
+		<!--조건 : 장바구니테이블의 상품 id가 상품테이블의 상품 id와 같고, 요청하는 회원의 id와 같은 경우 -->
+		
+	</select>
+	<!-- 장바구니 개별 상품 삭제 -->
+	<delete id="delete">
+		delete from cart where cart_id=#{cart_id}
+		<!-- 장바구니테이블로부터 장바구니 테이블의 id와 삭제하고자 하는 id가 같으면 장바구니 개별 상품을 삭제 -->
+	</delete>
+	<!-- 장바구니 비우기 -->
+	<delete id="deleteAll">
+		delete from cart where userid=#{userid}
+		<!-- 장바구니테이블로부터 회원의 아이디와 삭제하고자하는 회원의 아이디가 같으면 장바구니에 있는 자료를 전부다 삭제 -->
+	</delete>
+	
+	<update id="modify">
+		update cart set amount=#{amount}
+		<!-- 장바구니 테이블의 id와 요구한 장바구니 테이블의 id가 같은 경우 장바구니 테이블의 양(상품의양)을 갱신한다.-->
+		where cart_id=#{cart_id} 
+	</update>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
