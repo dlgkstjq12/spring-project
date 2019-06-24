@@ -55,6 +55,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<!-- 장바구니 테이블의 id와 요구한 장바구니 테이블의 id가 같은 경우 장바구니 테이블의 양(상품의양)을 갱신한다.-->
 		where cart_id=#{cart_id} 
 	</update>
+	
+	<select id = "cart_money"
+		resultType = "com.example.spring02.model.shop.dto.CartDTO">
+		select product_name, sum(price * amount) money 
+		from cart c, product p
+		where c.product_id=p.product_id
+		group by product_name
+		order by product_name
+		
+		<!-- 상품테이블과 장바구니 테이블로부터 상품의 이름과 전체 금액을 검색 -->
+		<!-- 조건 : 장바구니 테이블의 상품 id와 상품 테이블의 상품 id가 같은 것만 (즉, 내가 장바구니에 담은 상품의 id만) -->
+		<!-- 그리고 검색한 것들을 product_name란 속성을 만들어서 내림차순으로 정렬시킴 -->
+
+		</select>
 </mapper>
 
 

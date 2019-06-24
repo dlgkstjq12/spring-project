@@ -17,7 +17,7 @@ public class CartServiceImpl implements CartService {
 	
 	@Override
 	public List<CartDTO> cartMoney() {
-		return null;
+		return cartDao.cartMoney();
 	}
 	@Override
 	public void insert(CartDTO dto) {

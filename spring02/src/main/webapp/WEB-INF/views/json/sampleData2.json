@@ -1,0 +1,15 @@
+//구글에서 제공하는 구글 차트를 쓰려면 해야되는 형식
+//이 제이슨 데이터를 구글서버에 보내면 서버에서 이걸 해석해서 차트를 그려서 보내준다.
+{
+"cols": [
+{"id":"", "label":"Topping","pattern":"", "type":"string"},
+{"id":"", "label":"Slices","pattern":"", "type":"number"}
+],
+"rows":[
+{"c":[{"v":"Mushrooms"},{"v":3}]},
+{"c":[{"v":"Onions"},{"v":1}]}
+{"c":[{"v":"Olives"},{"v":1}]}
+{"c":[{"v":"Zucchini"},{"v":1}]}
+{"c":[{"v":"Pepperoni"},{"v":2}]}
+	]
+}
