@@ -53,6 +53,7 @@ width=device-width" />
 </tr>
 </table>
 </center>
+<%@ include file="include/Botton.jsp"%>
 </body>
 
 <!-- 로그인 실패나 성공시 메시지를 받아서 출력하는 자바스크립트 구문 -->

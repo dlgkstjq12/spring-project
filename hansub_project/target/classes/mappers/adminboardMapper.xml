@@ -115,8 +115,8 @@ update admin_board
 
 <!-- 레코드 갯수 계산 -->	
 	<select id="countArticle" resultType="int">
-		select count(*) / 15 + 1
-		from admin_board
+		select case when count(*) / 15 = 0 then count(*) / 15 + 1
+		else count(*) / 15 end from admin_board
 		<include refid="admin_search" />
 	</select>
 

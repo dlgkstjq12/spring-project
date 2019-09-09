@@ -51,8 +51,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 레코드 갯수 계산 -->	
 	<select id="countArticle" resultType="int">
-		select count(*) / 15 + 1
-		from member_board
+	<!-- 페이징 처리를 할때 만약 45개 글이 있으면 3개의 페이지만 나와야하는데 if문을 사용하지 않고 무조건 1을 더하면 비어있는 페이지인 4페이지까지
+	출력이 되기때문에 if문을 사용해서 처리한다. -->
+		select case when count(*) / 15 = 0 then count(*) / 15 + 1
+		else count(*) / 15 end from member_board
 		<include refid="search" />
 	</select>
 	

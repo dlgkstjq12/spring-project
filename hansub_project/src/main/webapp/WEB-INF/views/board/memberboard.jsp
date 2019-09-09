@@ -142,5 +142,6 @@ $(function(){
 
 
 </center>
+<%@ include file="include/Botton.jsp"%>
 </body>
 </html>

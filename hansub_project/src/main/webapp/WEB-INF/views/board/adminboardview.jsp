@@ -38,7 +38,7 @@ $(function(){
 
 		
 	$("#btnReply").click(function(){
-		
+		if(confirm("댓글을 작성하시겠습니까?")){
 	var r_content = $("#r_content").val();	//댓글의 내용
 	var bno =  "${dto.bno}";
 	var params = {"r_content" : r_content, "bno" : bno};
@@ -50,12 +50,13 @@ $(function(){
 		data: params, //보낼 데이터
 	
 		
-		success: function(data){//데이터를 보내는 것이 성공했을 시 출력되는 메시지
+		complete: function(data){//데이터를 보내는 것이 성공했을 시 출력되는 메시지
 			alert("댓글이 등록되었습니다.");
 			listReply2();
 				}
 			});
-		});
+		}
+	});
 	
 	
 
@@ -188,6 +189,6 @@ CKEDITOR.replace("content",{
 	<div id = "listReply"></div>
 	
 <body>
-
+<%@ include file="include/Botton.jsp"%>
 </body>
 </html>

@@ -294,7 +294,7 @@ public class MemberController {
 	
 	
 	
-		//로그인을 체크하는 메소드 (로그인이 성공하면 로그인 결과 페이지로 이동하고, 실패하면 다시 로그인 페이지로 이동한다.)
+	//로그인을 체크하는 메소드 (로그인이 성공하면 로그인 결과 페이지로 이동하고, 실패하면 다시 로그인 페이지로 이동한다.)
 	  @RequestMapping("normale_login.do") public ModelAndView login (String user_id, String
 	  member_pass, HttpSession session) throws Exception{
 	  
@@ -312,7 +312,7 @@ public class MemberController {
 	  mav.addObject("user_id", session.getAttribute(user_id));
 	  
 	  }else if(session.getAttribute(user_id)==null) { //로그인 실패
-	  mav.setViewName("member/login"); 
+	  mav.setViewName("home"); 
 	  //뷰에 전달할 값 
 	 
 	  mav.addObject("message","회원가입된 회원의 아이디 혹은 비밀번호가 일치하지 않습니다."); 
