@@ -14,6 +14,8 @@
 
 <body>
 회원님의 아이디는 ${user_id} 입니다.
+
+<br><br><%@ include file="../include/Botton.jsp"%>
 </body>
 </html>
 

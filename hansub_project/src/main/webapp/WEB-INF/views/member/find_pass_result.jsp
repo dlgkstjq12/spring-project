@@ -14,5 +14,7 @@
 
 <body>
 비밀번호가 변경되었습니다.
+
+<br><br><%@ include file="../include/Botton.jsp"%>
 </body>
 </html>

@@ -217,6 +217,6 @@ CKEDITOR.replace("r_content",{
 	<div id = "listReply"></div>
 	
 <body>
-<%@ include file="include/Botton.jsp"%>
+<br><br><%@ include file="../include/Botton.jsp"%>
 </body>
 </html>

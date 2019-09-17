@@ -20,7 +20,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.hansub_project.Admin_Pager;
 import com.example.hansub_project.Member_Pager;
-import com.example.hansub_project.Pager;
 import com.example.hansub_project.model.board.dto.AdminBoardDTO;
 import com.example.hansub_project.model.board.dto.MemberBoardDTO;
 import com.example.hansub_project.service.board.AdminBoardService;

@@ -18,5 +18,9 @@ public interface MemberDAO {
 	public void authentication(MemberDTO dto);		//소셜 로그인 회원인증 관련 메소드
 
 	public void pass_change(Map<String, Object> map, MemberDTO dto)throws Exception;	//비밀번호 변경
+
+	public boolean email_check(String e_mail) throws Exception;	//이메일 중복 확인
+
+	public boolean join_id_check(String user_id)throws Exception;	//아이디 중복 확인
 	
 }

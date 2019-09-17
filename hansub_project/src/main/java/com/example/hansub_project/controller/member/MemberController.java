@@ -44,13 +44,11 @@ import com.example.hansub_project.controller.member.MemberController;
 import com.example.hansub_project.model.member.dto.MemberDTO;
 
 
-@Controller	//컨트롤러 빈 선언
-public class MemberController {
-	
+	@Controller	//컨트롤러 빈 선언
+	public class MemberController {
 	
 	@Inject	//서비스를 호출하기 위해서 의존성을 주입
 	JavaMailSender mailSender; 	//메일 서비스를 사용하기 위해 의존성을 주입함.
-	
 	
 	@Inject
 	MemberService memberservice; //서비스를 호출하기 위해 의존성을 주입
@@ -62,16 +60,20 @@ public class MemberController {
 	private static final String String = null;
 	
 	
-	// mailSending 코드 (회원가입시 이메일 인증 메소드.)
-		@RequestMapping( value = "/member/auth.do" , method=RequestMethod.POST )
-		public ModelAndView mailSending(HttpServletRequest request, String e_mail, HttpServletResponse response_email) throws IOException {
+		// mailSending 코드 (회원가입시 이메일 인증 메소드.)
+		@RequestMapping( value = "/member/auth.do{e_mail}" , method=RequestMethod.POST )
+		public ModelAndView mailSending(HttpServletRequest request, @PathVariable String e_mail , HttpServletResponse response_email) throws IOException {
 
 			Random r = new Random();
+			
 			int dice = r.nextInt(4589362) + 49311;
 			
 			String setfrom = "dlgkstjq623@gamil.com";
-			String tomail = request.getParameter("e_mail"); // 받는 사람 이메일
+			
+			String tomail = e_mail; // 받는 사람 이메일
+			
 			String title = "회원가입 인증 이메일 입니다."; // 제목
+			
 			String content =
 			
 			System.getProperty("line.separator")+
@@ -124,6 +126,97 @@ public class MemberController {
 			return mv;
 			
 		}
+		
+		
+	//이메일 중복확인을 하는 메소드
+	@RequestMapping("/member/email_check.do")
+	
+	public ModelAndView email_check(String e_mail, HttpServletResponse response_equals) throws Exception	{
+		
+		memberservice.email_check(e_mail);
+		
+	if(memberservice.email_check(e_mail)) {
+		
+		response_equals.setContentType("text/html; charset=UTF-8");
+        
+		PrintWriter out_equals = response_equals.getWriter();
+        
+        out_equals.println("<script>alert('사용하실 수 있는 이메일 입니다.');</script>");
+        
+        out_equals.flush();
+        
+        ModelAndView mv = new ModelAndView();
+    	
+    	mv.setViewName("/member/email");
+    	
+    	mv.addObject("e_mail",e_mail);
+    	
+    	return mv;
+        
+		
+	} else {
+		
+		response_equals.setContentType("text/html; charset=UTF-8");
+        
+		PrintWriter out_equals = response_equals.getWriter();
+        
+        out_equals.println("<script>alert('사용할 수 없는 이메일 입니다. 다른 이메일을 입력해주세요.'); history.go(-1);</script>");
+        
+        out_equals.flush();
+		
+	}
+	
+	ModelAndView mv = new ModelAndView();
+	
+	mv.setViewName("/member/email");
+	
+		return mv;
+	}
+	
+	
+	//id 중복확인을 하는 메소드
+	@RequestMapping("/member/join_id_check.do{e_mail}")
+	public ModelAndView id_check(String user_id, HttpServletResponse response_equals, @PathVariable String e_mail) throws Exception	{
+		
+		
+		memberservice.join_id_check(user_id);
+		
+		//id가 기존 db에 저장되어 있지 않을 경우 실행되는 부분
+	if(memberservice.join_id_check(user_id)) {
+		
+		response_equals.setContentType("text/html; charset=UTF-8");
+        PrintWriter out_equals = response_equals.getWriter();
+        out_equals.println("<script>alert('사용하실 수 있는 아이디 입니다.');</script>");
+        out_equals.flush();
+        
+        ModelAndView mv = new ModelAndView();
+    	
+    	mv.setViewName("/member/join");
+    	
+    	mv.addObject("e_mail", e_mail);
+    	
+    	mv.addObject("user_id",user_id);
+    	
+    	return mv;
+        
+		//id가 기존 db에 저장되어 있을 경우 id가 중복된 것으므로 이쪽 구문이 실행된다.
+	} else {
+		response_equals.setContentType("text/html; charset=UTF-8");
+        PrintWriter out_equals = response_equals.getWriter();
+        out_equals.println("<script>alert('사용할 수 없는 아이디 입니다. 다른 아이디를 입력해주세요.'); history.go(-1);</script>");
+        out_equals.flush();
+		
+	}
+	
+	ModelAndView mv = new ModelAndView();
+	mv.setViewName("/member/join");
+	
+
+		return mv;
+	}
+	
+	
+	
 	
 	//이메일 인증 페이지 맵핑 메소드
 	@RequestMapping("/member/email.do")
@@ -181,7 +274,7 @@ public class MemberController {
 			
 			response_equals.setContentType("text/html; charset=UTF-8");
             PrintWriter out_equals = response_equals.getWriter();
-            out_equals.println("<script>alert('인증번호가 일치하지않습니다. 인증번호를 다시 입력해주세요.'); history.go(-1);</script>");
+            out_equals.println("<script>alert('인증번호가 일치하지않습니다. 인증번호를 다시 입력해주세요.');</script>");
             out_equals.flush();
 			
 	
@@ -194,8 +287,7 @@ public class MemberController {
 	}
 	
 	
-	
-	// mailSending 코드 (메인페이지에서 메일을 보낼때 맵핑되는 메소드)
+			// mailSending 코드 (메인페이지에서 메일을 보낼때 맵핑되는 메소드)
 			@RequestMapping(value = "e_mailForm.do" , method=RequestMethod.POST )
 			public ModelAndView main_mailSending(HttpServletRequest request, String sender_front, String sender_back, 
 			String recipient_front, String recipient_back, String title, String text, HttpServletResponse response_email) throws IOException {
@@ -260,8 +352,8 @@ public class MemberController {
 	
 	//회원가입 정보를 입력후 회원가입 버튼을 누르면 맵핑되는 메소드
 	//여러개의 값들을 담아야 하므로 map에 회원의 정보들을 저장해 놓는다.
-	@RequestMapping("/member/join_check.do{e_mail}")
-	public ModelAndView joincheck(String user_id, String member_pass, @PathVariable String e_mail, Model model, HttpServletRequest request) {
+	@RequestMapping("/member/join_check.do{user_id},{e_mail}")
+	public ModelAndView joincheck(@PathVariable String user_id, String member_pass, @PathVariable String e_mail, Model model, HttpServletRequest request) {
 
 		MemberDTO dto = new MemberDTO();
 		Map<String, Object> map = new HashMap<>();

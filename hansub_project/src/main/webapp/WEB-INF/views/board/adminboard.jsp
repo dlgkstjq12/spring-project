@@ -141,6 +141,6 @@ $(function(){
 
 
 </center>
-<%@ include file="include/Botton.jsp"%>
+<br><br><%@ include file="../include/Botton.jsp"%>
 </body>
 </html>

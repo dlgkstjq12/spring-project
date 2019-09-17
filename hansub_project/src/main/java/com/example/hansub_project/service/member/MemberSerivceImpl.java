@@ -77,5 +77,25 @@ public class MemberSerivceImpl implements MemberService {
 	}
 
 
+	//이메일 중복 확인
+	@Override
+	public boolean email_check(String e_mail) throws Exception{
+		
+		boolean result = memberdao.email_check(e_mail);
+		
+		return result;
+		
+	}
+
+	//아이디 중복 확인
+	@Override
+	public boolean join_id_check(String user_id) throws Exception {
+	
+		boolean result = memberdao.join_id_check(user_id);
+		
+		return result;
+	}
+	
+
 	
 }

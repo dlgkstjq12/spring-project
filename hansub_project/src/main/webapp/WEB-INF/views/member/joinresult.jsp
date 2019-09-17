@@ -33,6 +33,6 @@
 <% System.getProperty("line.separator");%>
 <% System.getProperty("line.separator");%>
 
-
+<br><br><%@ include file="../include/Botton.jsp"%>
 </body>
 </html>

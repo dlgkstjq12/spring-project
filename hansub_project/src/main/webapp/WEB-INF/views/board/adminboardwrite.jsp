@@ -45,6 +45,6 @@ CKEDITOR.replace("content");
 </script>
 
 </form>
-<%@ include file="include/Botton.jsp"%>
+<br><br><%@ include file="../include/Botton.jsp"%>
 </body>
 </html>

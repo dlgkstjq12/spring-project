@@ -16,7 +16,7 @@
 문자보내기 실행 완료
 
 
-
+<br><br><%@ include file="../include/Botton.jsp"%>
 
 </body>
 </html>

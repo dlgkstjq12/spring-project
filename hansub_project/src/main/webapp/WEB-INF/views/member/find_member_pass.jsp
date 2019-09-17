@@ -14,8 +14,8 @@
 <!-- 비밀번호 찾기 페이지 -->
 <!-- 에러메시지를 전달받는 함수 -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script>
 
+<script>
 	$(function(){
 		var responseMessage = "<c:out value="${message}" />";
 		if (responseMessage != ""){
@@ -40,6 +40,6 @@
 입력하신 이메일로 인증번호가 발송됩니다. 받으신 인증번호를 입력해주세요.
 </center>
 </form>
-
+<br><br><%@ include file="../include/Botton.jsp"%>
 </body>
 </html>

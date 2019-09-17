@@ -79,5 +79,26 @@ public class MemberDAOImpl implements MemberDAO {
 
 		sqlSession.update("member.pass_change", map);
 	}
+
+
+	@Override
+	public boolean email_check(String e_mail) throws Exception {
+		String email
+		=sqlSession.selectOne("member.email_check", e_mail);
+	
+		//조건식 ? true일때의 값 : false일때의 값
+		return (email==null) ? true : false;
+		
+	}
+
+
+	@Override
+	public boolean join_id_check(String user_id) throws Exception {
+		String user_id1
+		=sqlSession.selectOne("member.join_id_check", user_id);
+	
+		//조건식 ? true일때의 값 : false일때의 값
+		return (user_id1==null) ? true : false;
+	}
 	
 }

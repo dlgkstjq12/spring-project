@@ -81,6 +81,7 @@ callback 처리중입니다. 이 페이지에서는 callback을 처리하고 바
     	  	 window.location.href("http://" + window.location.hostname + ( (location.port==""||location.port==undefined)?"":":" + location.port) + "/hansub_project/home");
       }
  </script>
-
+ 
+<br><br><%@ include file="../include/Botton.jsp"%>
 </body>
 </html>

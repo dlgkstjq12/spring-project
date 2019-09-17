@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.hansub_project.Member_Pager;
-import com.example.hansub_project.Pager;
 import com.example.hansub_project.controller.member.MemberController;
 import com.example.hansub_project.model.board.dto.MemberBoardDTO;
 import com.example.hansub_project.model.board.dto.MemberBoardReplyDTO;

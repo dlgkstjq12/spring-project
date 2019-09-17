@@ -16,6 +16,8 @@ public interface MemberService {
 	public String find_passCheck(MemberDTO dto);	//비밀번호 찾기 관련
 	public void authentication(MemberDTO dto);		//회원 인증관련 메소드
 	public void pass_change(Map<String, Object> map, MemberDTO dto)throws Exception;	//비밀번호 변경
+	public boolean email_check(String e_mail) throws Exception;	//이메일 중복확인을 하는 메소드
+	public boolean join_id_check(String user_id) throws Exception;	//회원가입시 아이디를 체크하는 메소드
 	
 
 

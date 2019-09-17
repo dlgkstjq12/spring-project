@@ -140,7 +140,7 @@
 
 <%@ include file="include/login.jsp"%><br><br>
 	
-<%@ include file="include/Botton.jsp"%>
+<br><br><%@ include file="include/Botton.jsp"%>
 	
 </body>
 
