@@ -22,10 +22,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	where user_id=#{user_id}
 	</delete>
 	
-
-
-
-
+	
+	<!-- 회원 정보 찾기 관련 mapper -->
+	<select id="member_info" resultType="com.example.hansub_project.model.member.dto.MemberDTO">
+		select user_id, e_mail, join_date
+		from member
+		where user_id=#{user_id}
+	</select>
 
 
 

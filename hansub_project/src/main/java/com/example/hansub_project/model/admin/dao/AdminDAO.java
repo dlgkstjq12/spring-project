@@ -1,5 +1,7 @@
 package com.example.hansub_project.model.admin.dao;
 
+import java.util.List;
+
 import com.example.hansub_project.model.admin.dto.AdminDTO;
 import com.example.hansub_project.model.member.dto.MemberDTO;
 
@@ -9,5 +11,8 @@ public interface AdminDAO {
 
 
 	void admin_member_forced_evictionCheck(MemberDTO dto) throws Exception;	//회원 강제탈퇴 관련 메소드
+
+
+	List<MemberDTO> member_info(String user_id) throws Exception; 	//회원정보 확인하는 메소드
 
 }

@@ -1,5 +1,9 @@
 package com.example.hansub_project.model.admin.dao;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -36,6 +40,13 @@ public class AdminDAOImpl implements AdminDAO {
 		
 			sqlSession.delete("admin.admin_member_forced_evictionCheck", dto);
 
+	}
+
+	//회원의 정보를 리턴함
+	@Override
+	public List<MemberDTO> member_info(String user_id) throws Exception {
+		
+		return sqlSession.selectList("admin.member_info", user_id);
 	}
 
 

@@ -1,5 +1,10 @@
 package com.example.hansub_project.controller.admin;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
@@ -13,6 +18,9 @@ import com.example.hansub_project.controller.member.MemberController;
 import com.example.hansub_project.model.admin.dto.AdminDTO;
 import com.example.hansub_project.model.member.dto.MemberDTO;
 import com.example.hansub_project.service.admin.AdminService;
+import com.example.hansub_project.service.member.MemberService;
+
+import antlr.collections.List;
 
 
 @Controller //관리자 관련 컨트롤러 빈 선언
@@ -21,6 +29,7 @@ public class AdminController {	//관리자 권한 관련 컨트롤러
 	
 	@Inject	//서비스를 호출하기 위해서 의존성을 주입
 	AdminService adminservice;
+	
 
 	
 	private static final Logger logger= 
@@ -113,6 +122,64 @@ public class AdminController {	//관리자 권한 관련 컨트롤러
 		
 		return mav;
 				
+	}
+	
+	
+	//관리자로 로그인한 후에 회원정보 버튼을 누르면 맵핑되는 메소드 회원정보 페이지로 이동시킨다.
+	@RequestMapping(value = "/admin/admin_member_info.do")
+	public String member_info() throws Exception {
+	  
+		return "admin/member_info";
+	}
+	
+	
+	//회원아이디로 해당 회원의 정보를 검색하는 메소드
+	@RequestMapping(value = "/admin/find_member.do")
+	public ModelAndView find_member_info(String user_id, MemberDTO dto, Date join_date) throws Exception{
+		
+		//데이터베이스에서 검색한 값들을 DTO타입에 LIST에 저장한다.
+		java.util.List<MemberDTO> list = adminservice.find_member_info(user_id); 	//넘길 데이터가 많기 때문에		
+		
+		Map<String,Object> map = new HashMap<>();
+		
+		
+		//map에 리스트를 저장해서 출력할 view로 이동시킨다.
+		
+		//list가 null이면 회원정보가 없는것이므로 경고창을 출력하도록 함
+		
+		ModelAndView mv = new ModelAndView();
+		
+		//if문에서 list null처리를 할때에는 isEmpty()를 사용해서 null체크후 처리를 해주어야 한다.
+		//list안에 값이 들어있을때 실행되는 구문
+		if(!list.isEmpty()) {
+			
+			//join_date의 형식을 바꾸어야 하기 때문에 join_date만 따로 빼서 형식을 변경한 후에 따로 넘긴다.
+			for (int i = 0; i<list.size(); i++) {
+				
+				join_date = list.get(i).getJoin_date();
+				
+			}
+			
+			String re_join_date = new SimpleDateFormat("yyyy-MM-dd").format(join_date);
+			
+			map.put("re_join_date", re_join_date);
+			
+			map.put("list", list);
+			
+			mv.addObject("map",map);
+			
+			mv.setViewName("admin/member_info");
+			
+		}else {
+			
+			mv.addObject("message", "회원정보가 없는 회원입니다.");
+			
+			mv.setViewName("admin/member_info");
+		}
+		
+		
+		
+		return mv;
 	}
 	
 }

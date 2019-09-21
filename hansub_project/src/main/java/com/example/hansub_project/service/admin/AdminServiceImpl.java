@@ -1,5 +1,7 @@
 package com.example.hansub_project.service.admin;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
@@ -40,6 +42,13 @@ public class AdminServiceImpl implements AdminService {
 
 		admindao.admin_member_forced_evictionCheck(dto);
 		
+	}
+
+	//회원 정보 검색 메소드
+	@Override
+	public List<MemberDTO> find_member_info(String user_id) throws Exception {
+		
+		return admindao.member_info(user_id);
 	}
 
 }

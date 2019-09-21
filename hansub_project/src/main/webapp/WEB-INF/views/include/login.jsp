@@ -15,9 +15,7 @@
 
 <c:if test = "${sessionScope.user_id != null}">
 
-(일반)${sessionScope.user_id}님이 로그인 하셨습니다.<br>
-
-<form action = "logout.do" method = "post">
+(일반)${sessionScope.user_id}님이 로그인 하셨습니다.<form action = "logout.do" method = "post">
 <button type = "submit" name = "submit">로그아웃</button></form><br>
 
 </c:if>

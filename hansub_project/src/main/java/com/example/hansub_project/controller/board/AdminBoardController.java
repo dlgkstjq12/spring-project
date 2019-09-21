@@ -26,9 +26,9 @@ import com.example.hansub_project.service.board.AdminBoardService;
 
 
 @Controller	//게시판 관련 컨트롤러를 선언함
+
 public class AdminBoardController {
-	
-	
+		
 	@Inject		//서비스를 호출하기위해서 의존성을 주입함
 	AdminBoardService adminboardservice;
 	
@@ -79,8 +79,7 @@ public class AdminBoardController {
 		return mav;	//게시판 페이지로 이동
 	
 	}
-	
-	
+
 	
 	//글쓰기 버튼을 눌렀을때 뷰에서 맵핑되는 메소드
 		@RequestMapping("/board/admin_board_write.do")
