@@ -127,7 +127,7 @@
       <li>제목 : <input type="text" name="title" placeholder=" 이메일의 제목 입력"/></li><br>
       <li>내용 : <textarea name="text" name = "text" placeholder=" 보낼 내용 입력 "></textarea>    </li><br>
       <center>
-      <button type = "submit" name = "submit" >이메일 전송</button>
+      <button type = "submit" name = "submit" >이메일 전송</button><br><br><br>
       </center>
     </ul>
 

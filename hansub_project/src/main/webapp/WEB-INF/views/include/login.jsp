@@ -15,34 +15,46 @@
 
 <c:if test = "${sessionScope.user_id != null}">
 
-(일반)${sessionScope.user_id}님이 로그인 하셨습니다.<form action = "logout.do" method = "post">
-<button type = "submit" name = "submit">로그아웃</button></form><br>
+(일반)${sessionScope.user_id}님이 로그인 하셨습니다. <br><br>
+
+<form action = "logout.do" method = "post">
+<button type = "submit" name = "submit">로그아웃</button></form><br><br>
+
+<form action = "member_profile.do" method = "post">
+<button type = "submit" name = "submit">나의 프로필 확인</button></form><br><br>
+
 
 </c:if>
 
 
 <c:if test = "${sessionScope.navername != null}">
 
-(네이버)${sessionScope.navername}님이 로그인 하셨습니다.<br>
+(네이버)${sessionScope.navername}님이 로그인 하셨습니다.<br><br>
 
 <form action = "naver_logout.do" method = "post">
-<button type = "submit" name = "submit">로그아웃</button></form><br>
+<button type = "submit" name = "submit">로그아웃</button></form><br><br>
 
 <form action = "authentication.do" method = "post">
-<button type = "submit" name = "submit">회원 인증하기 (인증을 해야 각종 기능들 사용 가능)</button></form><br>
+<button type = "submit" name = "submit">회원 인증하기 (인증을 해야 각종 기능들 사용 가능)</button></form><br><br>
+
+<form action = "naver_member_profile.do" method = "post">
+<button type = "submit" name = "submit">나의 프로필 확인</button></form><br><br>
 
 </c:if>
 
 
 <c:if test = "${sessionScope.kakaonickname != null}">
 
-(카카오톡)${sessionScope.kakaonickname}님이 로그인 하셨습니다.<br>
+(카카오톡)${sessionScope.kakaonickname}님이 로그인 하셨습니다.<br><br>
 
 <form action = "kakao_logout.do" method = "post">
-<button type = "submit" name = "submit">로그아웃</button></form><br>
+<button type = "submit" name = "submit">로그아웃</button></form><br><br>
 
 <form action = "authentication.do" method = "post">
-<button type = "submit" name = "submit">회원 인증하기 (인증을 해야 각종 기능들 사용 가능)</button></form><br>
+<button type = "submit" name = "submit">회원 인증하기 (인증을 해야 각종 기능들 사용 가능)</button></form><br><br>
+
+<form action = "kakao_member_profile.do" method = "post">
+<button type = "submit" name = "submit">나의 프로필 확인</button></form><br><br>
 
 </c:if>
 
@@ -50,24 +62,28 @@
 
 <c:if test = "${sessionScope.facebookname != null}">
 
-(페이스북)${sessionScope.facebookname}님이 로그인 하셨습니다.<br>
+(페이스북)${sessionScope.facebookname}님이 로그인 하셨습니다.<br><br>
 
 <form action = "facebook_logout.do" method = "post">
-<button type = "submit" name = "submit">로그아웃</button></form><br>
+<button type = "submit" name = "submit">로그아웃</button></form><br><br>
 
 
 <form action = "authentication.do" method = "post">
-<button type = "submit" name = "submit">회원 인증하기 (인증을 해야 각종 기능들 사용 가능)</button></form><br>
+<button type = "submit" name = "submit">회원 인증하기 (인증을 해야 각종 기능들 사용 가능)</button></form><br><br>
+
+<form action = "facebook_member_profile.do" method = "post">
+<button type = "submit" name = "submit">나의 프로필 확인</button></form><br><br>
 
 </c:if>
 
 
 <c:if test = "${sessionScope.admin_id != null}">
 
-(관리자)${sessionScope.admin_id}님이 로그인 하셨습니다.<br>
+(관리자)${sessionScope.admin_id}님이 로그인 하셨습니다.<br><br>
 
 <form action = "logout.do" method = "post">
-<button type = "submit" name = "submit">로그아웃</button></form><br>
+<button type = "submit" name = "submit">로그아웃</button></form><br><br>
+
 
 </c:if>
 
@@ -86,9 +102,9 @@ String admin_id = request.getParameter("admin_id");
 
 
 //url로 보낸 이메일를 세션에 저장하기 위해 변수에 저장함
-String navere_mail = request.getParameter("navername");
-String kakaoe_mail = request.getParameter("kakaonickname");
-String facebooke_mail = request.getParameter("facebookname");
+String navere_mail = request.getParameter("navere_mail");
+String kakaoe_mail = request.getParameter("kakaoe_mail");
+String facebooke_mail = request.getParameter("facebooke_mail");
 
 %>	
 

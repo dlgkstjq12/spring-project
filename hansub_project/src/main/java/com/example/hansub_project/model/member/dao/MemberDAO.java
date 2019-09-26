@@ -1,6 +1,7 @@
 package com.example.hansub_project.model.member.dao;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.example.hansub_project.model.member.dto.MemberDTO;
@@ -22,5 +23,7 @@ public interface MemberDAO {
 	public boolean email_check(String e_mail) throws Exception;	//이메일 중복 확인
 
 	public boolean join_id_check(String user_id)throws Exception;	//아이디 중복 확인
+
+	public List<MemberDTO> member_profile(String user_id) throws Exception;	//회원의 프로필 정보를 확인할 수 있는 메소드
 	
 }

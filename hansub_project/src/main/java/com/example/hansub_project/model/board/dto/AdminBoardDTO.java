@@ -13,7 +13,6 @@ public class AdminBoardDTO {
 	private String content;		//댓글 내용
 	
 	
-	
 	public int getBno() {
 		return bno;
 	}

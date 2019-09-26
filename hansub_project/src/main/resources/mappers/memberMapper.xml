@@ -67,5 +67,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where user_id=#{user_id}
 	</select>		
 	
-
+	
+	<!-- 회원 프로필 확인 mapper -->
+	<select id = "member_profile" resultType="com.example.hansub_project.model.member.dto.MemberDTO">
+	select user_id, e_mail, join_date
+	from member
+	where user_id=#{user_id}
+	</select>
+	
+	
 </mapper>

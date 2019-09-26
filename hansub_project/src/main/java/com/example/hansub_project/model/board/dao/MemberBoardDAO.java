@@ -23,4 +23,7 @@ public interface MemberBoardDAO {
 	
 	public void recommend(int member_bno) throws Exception;		//추천하기 메소드
 	
+	//베스트게시판에 출력될 게시물들
+	public List<MemberBoardDTO> bestlistAll() throws Exception;
+	
 }

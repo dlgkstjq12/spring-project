@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
+
+<mapper namespace="bestboard">
+	
+	<!-- rownum을 rn이란 문자로 줄여쓴다. 밑에 from문을 A로 줄여쓴다.  -->
+  				<!-- 이 from문이 먼저 실행된 다음에 번호를 붙였기 때문에 일련번호가 다시 새로 매겨졌다. -->
+        		<!--  이 안쪽의 쿼리가 가장 중요함 -->
+
+
+<!-- 베스트게시물 게시판에 출력되는 목록 mapper -->
+<!-- 순위를 출력할때 먼저 추천수 기준으로 순위를 매기고 추천수가 동일한 경우에는
+조회수를 기준으로 순위를 다시 매겨서 중복이 없도록 출력한다. -->
+<select id="bestlistAll" resultType="com.example.hansub_project.model.board.dto.MemberBoardDTO">
+
+select member_bno, 
+user_id, 
+reg_date, 
+viewcnt, 
+title, 
+rcnt, 
+content, 
+recommend,
+row_number() over (order by recommend desc, viewcnt desc) as rk
+from 
+    (
+    select recommend, member_bno, user_id, reg_date, viewcnt, title, rcnt, content
+    from member_board
+    order by recommend desc
+)
+<![CDATA[where rownum <= 10]]>
+		
+</select>
+
+
+
+</mapper>

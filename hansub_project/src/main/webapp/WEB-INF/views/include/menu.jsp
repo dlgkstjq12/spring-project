@@ -19,6 +19,8 @@
 
 <a href="${path}/board/list.do">회원 게시판</a> ㅣ
 
+<a href="${path}/board/best_list.do">베스트 게시물 게시판</a> ㅣ
+
 <!-- 관리자가 로그인 하지 않았을 경우에만 로그인 링크를 출력시킴 -->
 <c:if test = "${sessionScope.user_id == null and sessionScope.navername == null and sessionScope.kakaonickname == null and sessionScope.facebookname == null and sessionScope.admin_id == null}">
 <a href="${path}/admin/admin_login_view.do">관리자 로그인</a> ㅣ	

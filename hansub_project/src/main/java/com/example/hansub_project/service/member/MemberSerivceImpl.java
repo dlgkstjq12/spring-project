@@ -1,6 +1,7 @@
 package com.example.hansub_project.service.member;
 
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -94,6 +95,14 @@ public class MemberSerivceImpl implements MemberService {
 		boolean result = memberdao.join_id_check(user_id);
 		
 		return result;
+	}
+
+
+	//자신의 프로필을 볼 수 있게 하는 메소드
+	@Override
+	public List<MemberDTO> member_profile(String user_id) throws Exception{
+		
+		return memberdao.member_profile(user_id);
 	}
 	
 

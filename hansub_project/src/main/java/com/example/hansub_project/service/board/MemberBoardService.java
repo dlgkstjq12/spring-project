@@ -29,4 +29,7 @@ public interface MemberBoardService {
 	
 	public void recommend(int member_bno) throws Exception;	//게시글 추천관련
 	
+	//베스트 게시판의 글 목록 보기
+	public List<MemberBoardDTO> bestlistAll() throws Exception;
+	
 }

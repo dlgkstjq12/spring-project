@@ -13,6 +13,9 @@ public class MemberBoardDTO {
 	private int rcnt;			//댓글 갯수
 	private String content;		//댓글 내용
 	private int recommend;		//추천수
+	private int rk;		//게시판 순위
+	
+	
 	
 	public int getMember_bno() {
 		return member_bno;
@@ -63,6 +66,13 @@ public class MemberBoardDTO {
 		this.recommend = recommend;
 	}
 	
+	public int getRk() {
+		return rk;
+	}
+	public void setRk(int rk) {
+		this.rk = rk;
+	}
+	
 	
 	@Override
 	public String toString() {
@@ -70,6 +80,9 @@ public class MemberBoardDTO {
 				+ ", viewcnt=" + viewcnt + ", title=" + title + ", rcnt=" + rcnt + ", content=" + content
 				+ ", recommend=" + recommend + "]";
 	}
+	
+	
+	
 
 	
 	

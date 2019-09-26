@@ -15,7 +15,7 @@ width=device-width" />
 </head>
 <br><br><%@ include file="../include/header.jsp"%>
 
-<table border="1" width="200">
+<table border="1" width="300">
 
 <tr>
 <td>
@@ -29,8 +29,8 @@ width=device-width" />
 <form action ="normale_login.do" method = "post">
 <center>
 <br>
--아이디-<input type = "text" name="user_id" placeholder="  ID를 입력하세요 "><br><br>
--비밀번호-<input type = "password" name="member_pass" placeholder="  비밀번호를 입력하세요 "><br><br>
+아이디 : <input type = "text" name="user_id" placeholder="  ID를 입력하세요 "><br><br>
+비밀번호 : <input type = "password" name="member_pass" placeholder="  비밀번호를 입력하세요 "><br><br>
 <button type = "submit" name = "submit" >로그인</button>
 
 <br>
@@ -64,7 +64,7 @@ width=device-width" />
 		{
 			//클라이언트 id와 콜백 url (결과페이지)
 			clientId: "DphfmDygX4WFkf8nghMJ",
-			callbackUrl: "http://localhost:8090/hansub_project/login_result",
+			callbackUrl: "http://localhost/hansub_project/login_result",
 			isPopup: false, /* 팝업을 통한 연동처리 여부 */
 			loginButton: {color: "green", type: 3, height: 40} /* 로그인 버튼의 타입을 지정 */
 		}
@@ -79,6 +79,7 @@ width=device-width" />
 
 </center>
 
+<center>
 <!-- 카카오톡 아이디 연동해서 로그인 -->
 <script src = "//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <a id="kakao-login-btn"></a>
@@ -107,13 +108,13 @@ Kakao.Auth.createLoginButton({
 		         // res.properties.nickname으로도 접근 가능 )
 		             console.log(authObj.access_token);//<---- 콘솔 로그에 토큰값 출력
 		  
-		 
+		  var id = res.id;	//카카오톡 닉네임을 변수에 저장
 		  var kakaonickname = res.properties.nickname;	//카카오톡 닉네임을 변수에 저장
-		  var kakaoe_mail = res.properties.kaccount_email;	//카카오톡 이메일을 변수에 저장함
+		  var kakaoe_mail = res.kaccount_email;	//카카오톡 이메일을 변수에 저장함
 		 
 		  
 
-		  window.location.replace("http://" + window.location.hostname + ( (location.port==""||location.port==undefined)?"":":" + location.port) + "/hansub_project/home?kakaonickname="+kakaonickname+"&kakaoe_mail="+kakaoe_mail);
+		  window.location.replace("http://" + window.location.hostname + ( (location.port==""||location.port==undefined)?"":":" + location.port) + "/hansub_project/home?kakaonickname="+kakaonickname+"kakaotalk"+"&kakaoe_mail="+kakaoe_mail);
 	  
 		           }
 		         })
@@ -123,6 +124,7 @@ Kakao.Auth.createLoginButton({
 		       }
 		     });
 </script>
+</center>
 
 
 <!-- 페이스북 아이디를 연동해서 로그인 -->

@@ -86,11 +86,18 @@ public class MemberBoardServiceImpl implements MemberBoardService {
 	//게시글 추천관련 메소드 구현
 	@Override
 	public void recommend(int member_bno) throws Exception {
-		
+		 
 		memberboarddao.recommend(member_bno);
 		
 		}
-
+	
+	//베스트 게시판 게시글 목록 출력
+	@Override
+	public List<MemberBoardDTO> bestlistAll() throws Exception {
+		
+		return memberboarddao.bestlistAll();
+		
+		}
 	}
 
 

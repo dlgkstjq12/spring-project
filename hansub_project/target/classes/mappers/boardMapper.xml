@@ -131,8 +131,9 @@ update member_board
 update member_board
 set recommend = recommend+1 
 where member_bno = #{member_bno} 
-
 </update>
+
+
 
 
 

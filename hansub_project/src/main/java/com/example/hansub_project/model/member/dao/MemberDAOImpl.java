@@ -2,6 +2,7 @@ package com.example.hansub_project.model.member.dao;
 
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -99,6 +100,14 @@ public class MemberDAOImpl implements MemberDAO {
 	
 		//조건식 ? true일때의 값 : false일때의 값
 		return (user_id1==null) ? true : false;
+	}
+
+	
+	//회원의 프로필 정보를 리턴한다.
+	@Override
+	public List<MemberDTO> member_profile(String user_id) throws Exception {
+		
+		return sqlSession.selectList("member.member_profile", user_id);
 	}
 	
 }

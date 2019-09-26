@@ -2,6 +2,8 @@ package com.example.hansub_project.controller.board;
 
 import java.io.PrintWriter;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -85,6 +87,29 @@ public class MemberBoardController {
 	
 	}
 	
+	
+	@RequestMapping("/board/best_list.do")	//세부적인 url mapping
+	public ModelAndView best_list(//RequestParam으로 옵션, 키워드, 페이지의 기본값을 각각 설정해준다.
+			)
+			 throws Exception{
+		
+		List<MemberBoardDTO> list = memberboardservice.bestlistAll();
+		
+		ModelAndView mav = new ModelAndView();
+		Map<String,Object> map = new HashMap<>();	//넘길 데이터가 많기 때문에 해쉬맵에 저장한 후에 modelandview로 값을 넣고 페이지를 지정
+		
+		map.put("list", list); 						//map에 list(게시글 목록)을 list라는 이름의 변수로 자료를 저장함.
+	
+		mav.addObject("map", map);					//modelandview에 map를 저장
+		
+		mav.setViewName("board/bestboard");				//자료를 넘길 뷰의 이름
+		
+		return mav;	//게시판 페이지로 이동
+	
+		
+	}
+	
+	
 	//글쓰기 버튼을 눌렀을때 뷰에서 맵핑되는 메소드
 	@RequestMapping("/board/write.do")
 		public String write(HttpSession session, HttpServletResponse write) throws Exception{
@@ -95,7 +120,7 @@ public class MemberBoardController {
 			String user_id = (String)session.getAttribute("user_id");
 			
 			}
-			
+
 			//소셜 로그인이 되어있을 경우에 실행되는 구문 유저의 아이디를 dto에 저장한다.
 			else if (session.getAttribute("navername") != null) {
 				
@@ -186,6 +211,7 @@ public class MemberBoardController {
 		return "forward:/board/list.do";
 		}
 	
+	//일반 게시판 게시물 세부 내용 확인
 	@RequestMapping(value = "/board/view.do", method= {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView view(@RequestParam int member_bno,
 			@RequestParam int curPage,
@@ -207,6 +233,27 @@ public class MemberBoardController {
 		
 		return mav; 	//view로 넘어가서 출력이 된다.
 	}
+	
+	
+	
+	//베스트 게시판 게시물 세부 내용 확인
+	@RequestMapping(value = "/board/best_board_view", method= {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView best_board_view(@RequestParam int member_bno, HttpSession session) throws Exception{
+		
+		//조회수 증가 쿼리
+		memberboardservice.increaseViewcnt(member_bno, session);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("board/bestboardview");
+		
+		//view로 자료를 넘기기위해서 mav에 값들을 저장해서 view.jsp로 리턴시킨다.
+		mav.addObject("dto", memberboardservice.read(member_bno)); //상세보기를 한번 클릭하면 조회수를 1증가시킨다.
+		
+		return mav; 	//view로 넘어가서 출력이 된다.
+	}
+	
+	
+	
 	
 	//게시물 삭제 관련 메소드
 	@RequestMapping("/board/delete.do")
@@ -311,5 +358,181 @@ public class MemberBoardController {
 				  } 
 				  	return mav; 
 				}
+				  
+				  
+				//회원아이디로 해당 회원의 정보를 검색하는 메소드
+					@RequestMapping(value = "/board/member_profile.do")
+					public ModelAndView member_profile(HttpSession session, Date join_date, MemberDTO dto) throws Exception{
+						
+						//세션에 저장되어 있는 회원의 아이디를 변수에 저장함
+						String user_id =(String)session.getAttribute("user_id");
+						
+						//데이터베이스에서 검색한 값들을 DTO타입에 LIST에 저장한다.
+						java.util.List<MemberDTO> list = memberservice.member_profile(user_id);
+						
+						Map<String,Object> map = new HashMap<>();
+						
+						//map에 리스트를 저장해서 출력할 view로 이동시킨다.
+						
+						//list가 null이면 회원정보가 없는것이므로 경고창을 출력하도록 함
+						
+						ModelAndView mv = new ModelAndView();
+						
+						//if문에서 list null처리를 할때에는 isEmpty()를 사용해서 null체크후 처리를 해주어야 한다.
+						//list안에 값이 들어있을때 실행되는 구문
+						if(!list.isEmpty()) {
+							
+							//join_date의 형식을 바꾸어야 하기 때문에 join_date만 따로 빼서 형식을 변경한 후에 따로 넘긴다.
+							for (int i = 0; i<list.size(); i++) {
+								
+								join_date = list.get(i).getJoin_date();
+								
+							}
+							
+							String re_join_date = new SimpleDateFormat("yyyy-MM-dd").format(join_date);
+							
+							map.put("re_join_date", re_join_date);
+							
+							map.put("list", list);
+							
+							mv.addObject("map",map);
+							
+							mv.setViewName("member/member_profile");
+							
+						}
+						
+						return mv;
+					}
+					
+					//회원의 아이디로 회원 프로필을 출력하는 메소드 (네이버)
+					@RequestMapping(value = "/board/naver_member_profile.do")
+					public ModelAndView naver_member_profile(HttpSession session, Date join_date, MemberDTO dto) throws Exception{
+						
+						
+						//세션에 저장되어 있는 회원의 아이디를 변수에 저장함
+						String user_id =(String)session.getAttribute("navername");
+						
+						//데이터베이스에서 검색한 값들을 DTO타입에 LIST에 저장한다.
+						java.util.List<MemberDTO> list = memberservice.member_profile(user_id);
+						
+						Map<String,Object> map = new HashMap<>();
+						
+						//map에 리스트를 저장해서 출력할 view로 이동시킨다.
+						
+						//list가 null이면 회원정보가 없는것이므로 경고창을 출력하도록 함
+						
+						ModelAndView mv = new ModelAndView();
+						
+						//if문에서 list null처리를 할때에는 isEmpty()를 사용해서 null체크후 처리를 해주어야 한다.
+						//list안에 값이 들어있을때 실행되는 구문
+							
+							//join_date의 형식을 바꾸어야 하기 때문에 join_date만 따로 빼서 형식을 변경한 후에 따로 넘긴다.
+							for (int i = 0; i<list.size(); i++) {
+								
+								join_date = list.get(i).getJoin_date();
+								
+							}
+							
+							String re_join_date = new SimpleDateFormat("yyyy-MM-dd").format(join_date);
+							
+							map.put("re_join_date", re_join_date);
+							
+							map.put("list", list);
+							
+							mv.addObject("map",map);
+							
+							mv.setViewName("member/member_profile");
+							
+
+						return mv;
+					}
+					
+					
+						//회원의 아이디로 회원 프로필을 출력하는 메소드 (카카오톡)
+						@RequestMapping(value = "/board/kakao_member_profile.do")
+						public ModelAndView kakao_member_profile(HttpSession session, Date join_date, MemberDTO dto) throws Exception{
+								
+								
+							//세션에 저장되어 있는 회원의 아이디를 변수에 저장함
+							String user_id =(String)session.getAttribute("kakaonickname");
+								
+							//데이터베이스에서 검색한 값들을 DTO타입에 LIST에 저장한다.
+							java.util.List<MemberDTO> list = memberservice.member_profile(user_id);
+								
+							Map<String,Object> map = new HashMap<>();
+								
+							//map에 리스트를 저장해서 출력할 view로 이동시킨다.
+								
+							//list가 null이면 회원정보가 없는것이므로 경고창을 출력하도록 함
+								
+							ModelAndView mv = new ModelAndView();
+								
+								//if문에서 list null처리를 할때에는 isEmpty()를 사용해서 null체크후 처리를 해주어야 한다.
+								//list안에 값이 들어있을때 실행되는 구문
+									
+									//join_date의 형식을 바꾸어야 하기 때문에 join_date만 따로 빼서 형식을 변경한 후에 따로 넘긴다.
+									for (int i = 0; i<list.size(); i++) {
+										
+										join_date = list.get(i).getJoin_date();
+										
+									}
+									
+									String re_join_date = new SimpleDateFormat("yyyy-MM-dd").format(join_date);
+									
+									map.put("re_join_date", re_join_date);
+									
+									map.put("list", list);
+									
+									mv.addObject("map",map);
+									
+									mv.setViewName("member/member_profile");
+									
+
+								return mv;
+							}
+						
+						
+						//회원의 아이디로 회원 프로필을 출력하는 메소드 (페이스북)
+						@RequestMapping(value = "/board/facebook_member_profile.do")
+						public ModelAndView facebook_member_profile(HttpSession session, Date join_date, MemberDTO dto) throws Exception{
+								
+								
+							//세션에 저장되어 있는 회원의 아이디를 변수에 저장함
+							String user_id =(String)session.getAttribute("facebookname");
+								
+							//데이터베이스에서 검색한 값들을 DTO타입에 LIST에 저장한다.
+							java.util.List<MemberDTO> list = memberservice.member_profile(user_id);
+								
+							Map<String,Object> map = new HashMap<>();
+								
+							//map에 리스트를 저장해서 출력할 view로 이동시킨다.
+								
+							//list가 null이면 회원정보가 없는것이므로 경고창을 출력하도록 함
+								
+							ModelAndView mv = new ModelAndView();
+								
+								//if문에서 list null처리를 할때에는 isEmpty()를 사용해서 null체크후 처리를 해주어야 한다.
+								//list안에 값이 들어있을때 실행되는 구문
+									
+									//join_date의 형식을 바꾸어야 하기 때문에 join_date만 따로 빼서 형식을 변경한 후에 따로 넘긴다.
+									for (int i = 0; i<list.size(); i++) {
+										
+										join_date = list.get(i).getJoin_date();
+										
+									}
+									
+									String re_join_date = new SimpleDateFormat("yyyy-MM-dd").format(join_date);
+									
+									map.put("re_join_date", re_join_date);
+									
+									map.put("list", list);
+									
+									mv.addObject("map",map);
+									
+									mv.setViewName("member/member_profile");
+									
+
+								return mv;
+							}
 	
 }

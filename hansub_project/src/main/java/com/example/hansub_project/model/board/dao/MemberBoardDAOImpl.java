@@ -85,8 +85,13 @@ public class MemberBoardDAOImpl implements MemberBoardDAO {
 		sqlSession.update("memberboard.recommend", member_bno);
 	}
 
-
 	
-}
+	//베스트 게시글 게시판 게시글 목록 출력
+	@Override
+	public List<MemberBoardDTO> bestlistAll() throws Exception {
+		
+			return sqlSession.selectList("bestboard.bestlistAll");
+		}
 	
+}	
 	

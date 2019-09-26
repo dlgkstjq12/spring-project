@@ -1,6 +1,8 @@
 package com.example.hansub_project.controller.board;
 
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +24,7 @@ import com.example.hansub_project.Admin_Pager;
 import com.example.hansub_project.Member_Pager;
 import com.example.hansub_project.model.board.dto.AdminBoardDTO;
 import com.example.hansub_project.model.board.dto.MemberBoardDTO;
+import com.example.hansub_project.model.member.dto.MemberDTO;
 import com.example.hansub_project.service.board.AdminBoardService;
 
 
