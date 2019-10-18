@@ -12,6 +12,12 @@ width=device-width" />
 
 <title>Insert title here</title>
 
+<!-- css코드를 추가함 -->
+<link rel = "stylesheet" href = "/css/bootstrap.css">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+
+
 </head>
 <%@ include file="../include/header.jsp" %>
 <%@ include file="../include/menu.jsp" %>
@@ -24,10 +30,12 @@ width=device-width" />
 <br>
 
 <center>
-<table border="1" width="400">
+<table border="1" width="500px" class = "table-hover">
 
-<tr>
-<td>
+<div class="card align-middle" style="width:30rem; border-radius:20px;">
+		
+<div class="card-body">
+
 <br>
 <center>
 <span style="color:green; font-weight : bold;">관리자 로그인</span>
@@ -38,34 +46,26 @@ width=device-width" />
 <form action ="admin_login.do" method = "post">
 <center>
 <br>
--관리자 아이디- <input type = "text" name="admin_id" placeholder="  ID를 입력하세요 "><br><br>
--관리자 비밀번호- <input type = "password" name="admin_pass" placeholder="  비밀번호를 입력하세요 "><br><br>
-<button type = "submit" name = "submit" >로그인</button>
+<input type = "text" name="admin_id" placeholder="  ID를 입력하세요 " class="form-control"><br><br>
+<input type = "password" name="admin_pass" placeholder="  비밀번호를 입력하세요 " class="form-control"><br><br>
+<button type = "submit" name = "submit" class="form-control btn btn-primary">로그인</button>
 
 <br>
 <br>
-<div class = "row">
-	<div class="col-xs-8">
-		<div class="checkbox icheck">
-		<label>
-			<input type = "checkbox" name = "useCookie"> 로그인유지
-		</label>
-		</div>
-	</div>
-</div>
+
 </center>
 
 <center>
 
 
 </form>
-
 </center>
-</td>
-</tr>
+</div>
+</div>
+
 </table>
 </center>
-<br><br><%@ include file="../include/Botton.jsp"%>
+
 </body>
 
 

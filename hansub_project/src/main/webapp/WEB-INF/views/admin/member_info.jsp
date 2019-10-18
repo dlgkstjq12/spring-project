@@ -7,6 +7,12 @@
 <head>
 <meta charset="UTF-8">
 
+
+<!-- css코드를 추가함 -->
+<link rel = "stylesheet" href = "/css/bootstrap.css">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+
 </head>
 <%@ include file="../include/header.jsp"%>
 <%@ include file="../include/menu.jsp"%><br>
@@ -27,17 +33,31 @@ $(function(){
 		<center>
 		<br>
 		<br>
-		<br>
+		
+<table border="1" width="500px" class = "table-hover">
+
+<div class="card align-middle" style="width:50rem; border-radius:20px;">
+		
+<div class="card-body">
+		
+		
 		<span style="color: green; font-weight: bold;">회원 정보 검색</span> <br> <br>
 		</center>
 
 <!-- 회원의 아이디를 입력하면 해당 회원에 정보가 하단에 출력되게 함 -->
 <form action = "find_member.do" method = "post">
 <center>
-회원 아이디 : <input type="text" name="user_id" placeholder="아이디를 입력하세요.">
-<button type = "submit" name = "submit" >확인</button><br><br><br>
+<span style="color: black; font-weight: bold;">회원 아이디<br><br>
+
+<input type="text" name="user_id" placeholder="아이디를 입력하세요." class="form-control"><br><br>
+<button type = "submit" name = "submit" class="form-control btn btn-primary">확인</button><br><br><br>
 </center>
 </form>
+</div>
+</div>
+</table>
+</center>
+
 
 <c:if test = "${map.list != null}">
 
@@ -46,29 +66,37 @@ $(function(){
 
 <span style="color: green; font-weight: bold;">해당하는 회원 정보</span> <br> <br>
 
-<table border="1" width="300" height="250">
+<table border="1" width="500px" class = "table-hover">
+
+<div class="card align-middle" style="width:50rem; border-radius:20px;">
+		
+<div class="card-body">
 	
 		<div style="text-align:center;">
-			<tr>		
-				<td>
+			
 					
-					<center>
-						<div>	
+<center>
+							
 	<c:forEach var = "member" items = "${map.list}"><!-- 컨트롤러에서 넘어온 map의 값 --> 
 	
-							아이디 : ${member.user_id} <br><br>
+  <span style="color: black; font-weight: bold;">아이디 :</span>
+  <span style="color: red; font-weight: bold;"> ${member.user_id}</span><br><br>
 							
-							이메일 : ${member.e_mail} <br><br>
+  <span style="color: black; font-weight: bold;">이메일 :</span>
+  <span style="color: red; font-weight: bold;">${member.e_mail}</span><br><br>
 							
-							가입날짜 : ${map.re_join_date} <br><br>
+	
+  <span style="color: black; font-weight: bold;">가입날짜 :</span>
+  <span style="color: red; font-weight: bold;"> ${map.re_join_date} <br><br>
 							
-						</div>						
+												
 						
 						
 					</center>
-						
-					</td>
-				</tr>
+					</div>
+					</div>
+				
+					
 				</div>
 				</c:forEach>
 			</table>
@@ -78,6 +106,6 @@ $(function(){
 
 
 
-<br><br><%@ include file="../include/Botton.jsp"%>
+
 </body>
 </html>

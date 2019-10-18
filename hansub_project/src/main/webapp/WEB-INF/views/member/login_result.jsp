@@ -82,6 +82,6 @@ callback 처리중입니다. 이 페이지에서는 callback을 처리하고 바
       }
  </script>
  
-<br><br><%@ include file="../include/Botton.jsp"%>
+
 </body>
 </html>

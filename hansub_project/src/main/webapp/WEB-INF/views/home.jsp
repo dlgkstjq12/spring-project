@@ -2,146 +2,92 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
-
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>메인페이지</title>
+<head>
 
 
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Bootstrap CSS -->
+  <link href="/css/bootstrap.css" rel="stylesheet">
+<header class="masthead">
+<link href="/css/agency.css" rel="stylesheet">
 
-</head>
+	<style>
+      d {
+        font-family: "Arial Black", sans-serif;
+        font-size: 45px;
+        font-weight: bold;
+        color: #ffffff;
+      }
+      .s3 { text-shadow: 6px 2px 2px gray; }
+      
+      
+       c {
+        font-family: "Arial Black", sans-serif;
+        font-size: 45px;
+        font-weight: bold;
+        color: gren;
+      }
+      
+      .s4 { text-shadow: 10px 4px 4px red; }
+      
+       p {
+        margin: 20px;
+        padding: 20px 0px;
+        text-align: center;
+        text-transform: uppercase;
+        font-family: "Arial Black", sans-serif;
+        font-size: 60px;
+        font-weight: bold;
+      }
+      .s2 {
+    
+        color: #ffffff;
+        text-shadow: 4px 4px 0px #bdbdbd;
+      }
+      
+      
+    </style>
+  
+  
+	</head>
+
+
 <%@ include file="include/header.jsp"%>
 <%@ include file="include/menu.jsp"%>
 
-<body>
-
-
+<body background = "https://i.pinimg.com/originals/c6/4a/1d/c64a1d3ec620f0550c9211e83bbb0512.jpg">
 <br>
 <br>
-
-
-
-
-<!-- 문자보내는 폼 -->
-<form method="post" id="smsForm">
-<table border = "1" align="right" width = "300" height = "200" >
-
-<tr>
-<td>
-<center>
-<br>
-<span style="color: green; font-weight: bold;">SMS 전송 (문자보내기)</span>
- </center>
-    <ul>
-      <li>받는 사람 : <input type="text" name="from" placeholder=" 전화번호 입력 ( '-' 포함 )"/></li><br>
-      <li>내용 : <textarea name="text" placeholder=" 보낼 내용 입력 "></textarea>    </li><br>
-      <center>
-      <input type="button" onclick="sendSMS('sendSms')" value="전송하기" /><br>
-      </center>
-    </ul>
-
-    </td>
-    </tr>
-    </table>
-  </form>
-
-  <script>
-    function sendSMS(pageName){
-
-    	console.log("문자를 전송합니다.");
-    	$("#smsForm").attr("action", pageName + ".do"); //위에 있는 폼태그를 컨트롤러로 전송한다.
-    	$("#smsForm").submit();
-    }
-  </script>
-  
- <html>
- 	<head>
- 	
- 	</head>
- 	<body>
- 	
- 	</body>
- </html>
-
-  
-  
-  
-
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-
+ <Script src="/js/jquery-3.3.1.min.js"></script>
+ <Script src="/js/bootstrap.min.js"></script>
  
-  <!-- 이메일 보내기 폼 -->
-<form action ="e_mailForm.do" method = "post">
-<table border = "1" align="right" width = "450" height = "250" >
+<p class="s2">welcome to hs_project!!</p>
 
-<tr>
-<td>
-<center>
-<br>
-<span style="color: green; font-weight: bold;">이메일 보내기</span>
- </center>
-    <ul>
-      <li>보내는 사람 : <input type="text" name="sender_front" placeholder="이메일 아이디 입력">
-      <select type = "text" name = "sender_back"  >
-      		
-      			<option value = "@naver.com">@naver.com</option>				
-      			<option value = "@hanmail.net">@hanmail.net</option>
-      			<option value = "@gmail.com">@gmail.com</option>
-      
-      </select>
-      </li>
-      <br>
-      
-      
-      <li>받는 사람 : <input type="text" name = "recipient_front" placeholder="이메일 아이디 입력">
-      <select name="recipient_back" type="text" >
-      
-      			<option value = "@naver.com">@naver.com</option>				
-      			<option value = "@hanmail.net">@hanmail.net</option>
-      			<option value = "@gmail.com">@gmail.com</option>
-      			<option value = "@chol.com">@chol.com</option>				
-      			<option value = "@empal.com">@empal.com</option>
-      			<option value = "@freechal.com">@freechal.com</option>
-      			<option value = "@hanmir.com">@hanmir.com</option>				
-      			<option value = "@hitel.net">@hitel.net</option>
-      			<option value = "@nete.com">@nate.com</option>
-      			
-			
-      </select>
-      </li>
-      <br>
-      
-      
-      <li>제목 : <input type="text" name="title" placeholder=" 이메일의 제목 입력"/></li><br>
-      <li>내용 : <textarea name="text" name = "text" placeholder=" 보낼 내용 입력 "></textarea>    </li><br>
-      <center>
-      <button type = "submit" name = "submit" >이메일 전송</button><br><br><br>
-      </center>
-    </ul>
-
-    </td>
-    </tr>
-    </table>
-  </form>
-
-
-
-<%@ include file="include/login.jsp"%><br><br>
+<div style="width: 60%; height:150px; float: right;">
+	<center>
 	
-<br><br><%@ include file="include/Botton.jsp"%>
+ 	<br><br><br><br><br>
+    <d class="s3">We Create Value</d><br><br><br><br>
+	<d class="s3">With You...</d><br><br><br><br>
+	<d class="s3">Now is the time.</d><br><br><br><br>
+	<c class="s4">Communicate and share with each other</c><br><br><br><br>
 	
+	</center>
+</div>
+
+<div style="width: 30%; height:150px; float: left;">
+
+<%@ include file="include/login.jsp"%>
+
+</div>
+
+ 	
+
+
 </body>
 
 <!-- 로그인 실패나 성공시 메시지를 받아서 출력하는 자바스크립트 구문 -->
@@ -154,6 +100,10 @@
 		}
 	})
 </script>
+
+
+<br>
+<br>
 
 
 </html>

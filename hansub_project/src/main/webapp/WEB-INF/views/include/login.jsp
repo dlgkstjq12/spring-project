@@ -15,13 +15,13 @@
 
 <c:if test = "${sessionScope.user_id != null}">
 
-(일반)${sessionScope.user_id}님이 로그인 하셨습니다. <br><br>
+<span style="color: black; font-weight: bold;">(일반)${sessionScope.user_id}님이 로그인 하셨습니다.</span><br><br>
 
 <form action = "logout.do" method = "post">
-<button type = "submit" name = "submit">로그아웃</button></form><br><br>
+<button type = "submit" name = "submit" class="btn btn-primary">로그아웃</button></form><br><br>
 
 <form action = "member_profile.do" method = "post">
-<button type = "submit" name = "submit">나의 프로필 확인</button></form><br><br>
+<button type = "submit" name = "submit" class = "btn btn-primary">나의 프로필 확인</button></form><br><br>
 
 
 </c:if>
@@ -29,32 +29,32 @@
 
 <c:if test = "${sessionScope.navername != null}">
 
-(네이버)${sessionScope.navername}님이 로그인 하셨습니다.<br><br>
+<span style="color: black; font-weight: bold;">(네이버)${sessionScope.navername}님이 로그인 하셨습니다.</span><br><br>
 
 <form action = "naver_logout.do" method = "post">
-<button type = "submit" name = "submit">로그아웃</button></form><br><br>
+<button type = "submit" name = "submit" class="btn btn-primary">로그아웃</button></form><br><br>
 
 <form action = "authentication.do" method = "post">
-<button type = "submit" name = "submit">회원 인증하기 (인증을 해야 각종 기능들 사용 가능)</button></form><br><br>
+<button type = "submit" name = "submit" class = "btn btn-primary">회원 인증하기 (인증을 해야 각종 기능들 사용 가능)</button></form><br><br>
 
 <form action = "naver_member_profile.do" method = "post">
-<button type = "submit" name = "submit">나의 프로필 확인</button></form><br><br>
+<button type = "submit" name = "submit" class = "btn btn-primary">나의 프로필 확인</button></form><br><br>
 
 </c:if>
 
 
 <c:if test = "${sessionScope.kakaonickname != null}">
 
-(카카오톡)${sessionScope.kakaonickname}님이 로그인 하셨습니다.<br><br>
+<span style="color: black; font-weight: bold;">(카카오톡)${sessionScope.kakaonickname}님이 로그인 하셨습니다.</span><br><br>
 
 <form action = "kakao_logout.do" method = "post">
-<button type = "submit" name = "submit">로그아웃</button></form><br><br>
+<button type = "submit" name = "submit" class="btn btn-primary">로그아웃</button></form><br><br>
 
 <form action = "authentication.do" method = "post">
-<button type = "submit" name = "submit">회원 인증하기 (인증을 해야 각종 기능들 사용 가능)</button></form><br><br>
+<button type = "submit" name = "submit" class = "btn btn-primary">회원 인증하기 (인증을 해야 각종 기능들 사용 가능)</button></form><br><br>
 
 <form action = "kakao_member_profile.do" method = "post">
-<button type = "submit" name = "submit">나의 프로필 확인</button></form><br><br>
+<button type = "submit" name = "submit" class = "btn btn-primary">나의 프로필 확인</button></form><br><br>
 
 </c:if>
 
@@ -62,27 +62,27 @@
 
 <c:if test = "${sessionScope.facebookname != null}">
 
-(페이스북)${sessionScope.facebookname}님이 로그인 하셨습니다.<br><br>
+<span style="color: black; font-weight: bold;">(페이스북)${sessionScope.facebookname}님이 로그인 하셨습니다.</span><br><br>
 
 <form action = "facebook_logout.do" method = "post">
-<button type = "submit" name = "submit">로그아웃</button></form><br><br>
+<button type = "submit" name = "submit" class="btn btn-primary">로그아웃</button></form><br><br>
 
 
 <form action = "authentication.do" method = "post">
-<button type = "submit" name = "submit">회원 인증하기 (인증을 해야 각종 기능들 사용 가능)</button></form><br><br>
+<button type = "submit" name = "submit" class = "btn btn-primary">회원 인증하기 (인증을 해야 각종 기능들 사용 가능)</button></form><br><br>
 
 <form action = "facebook_member_profile.do" method = "post">
-<button type = "submit" name = "submit">나의 프로필 확인</button></form><br><br>
+<button type = "submit" name = "submit" class = "btn btn-primary">나의 프로필 확인</button></form><br><br>
 
 </c:if>
 
 
 <c:if test = "${sessionScope.admin_id != null}">
 
-(관리자)${sessionScope.admin_id}님이 로그인 하셨습니다.<br><br>
+<span style="color: black; font-weight: bold;">(관리자)${sessionScope.admin_id}님이 로그인 하셨습니다.</span><br><br>
 
 <form action = "logout.do" method = "post">
-<button type = "submit" name = "submit">로그아웃</button></form><br><br>
+<button type = "submit" name = "submit" class="btn btn-primary">로그아웃</button></form><br><br>
 
 
 </c:if>
@@ -128,10 +128,10 @@ if (navername == null && kakaonickname == null && facebookname == null && normal
 	
 %>
 
-(guest)님 방문을 환영합니다. 	<br>
-								<br>
+<span style="color: black; font-weight: bold;">(guest)님 방문을 환영합니다.</span><br><br>
 								
-로그인을 하셔야 다른 기능을 정상적으로 이용하실 수 있습니다. <br>
+								
+<span style="color: red; font-weight: bold;">로그인을 하셔야 다른 기능을 정상적으로 이용하실 수 있습니다.</span><br>
 		
 	<%@ include file="../member/login_form.jsp"%><br>
 	

@@ -12,6 +12,23 @@
 <script src="${path}/ckeditor/ckeditor.js"></script>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<link href="bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+ <style>
+    #contentForm {
+      width: 40%;
+      margin: 0 auto;
+      padding-top: 12%;
+    }
+ 
+    .table > thead > tr > th, .table > tbody > tr > th {
+      background-color: #e6ecff;
+      text-align: center;
+    }
+  </style>
+
+
 <script>
 $(function(){
 	
@@ -53,10 +70,9 @@ $(function(){
 				}
 			});
 		}
+		
 	});
 	
-	
-
 	
 //댓글 목록을 출력하는 함수
 function listReply(){
@@ -70,8 +86,6 @@ function listReply(){
 			}
 		});
 }
-
-
 
 
 function listReply2(){
@@ -101,8 +115,6 @@ function listReply2(){
 }
 
 
-
-
 //삭제 버튼
 $("#btnDelete").click(function(){
     if(confirm("삭제하시겠습니까?")){
@@ -121,30 +133,45 @@ $("#btnRecommend").click(function(){
         alert("해당 글을 추천하였습니다.")
         
     	}
+    
 	});
 
-	
-	
 });
-
 
 
 </script>
 
-<h2>게시물 보기</h2>
+<h2>게시물 보기 </h2> 조회수 : ${dto.viewcnt}
 <!-- 게시물을 작성하기 위해 컨트롤러의 insert.do로 맵핑 -->
 <form id="form1" name="form1" method="post" action="${path}/board/insert.do">
-<input type = "hidden" id = "member_bno" name = "member_bno" value = "${dto.member_bno }">
-    <div>제목 <input name="title" id="title" size="80"
+<div class="input-group input-group-sm" role="group" style = "text-align:left">
+<table class="table table-striped table-bordered">
+<tread>
+<tr>
+<td><input type = "hidden" id = "member_bno" name = "member_bno" class="form-control" aria-describedby="basic-addon1" value = "${dto.member_bno }" class="form-control" aria-describedby="basic-addon1" >글번호 : ${dto.member_bno }</td>
+</tr>
+
+
+<tr>
+<td><input name="title" id="title" size="80"
                     value="${dto.title}"
-                    placeholder="제목을 입력하세요"><br><br>
+                    placeholder="제목을 입력하세요" class="form-control" aria-describedby="basic-addon1" ></td></tr>
+                    
+<br><br>
+                              
 <!-- placeholder은 제목을 입력할 수 있도록 도움말을 출력함 -->
-    </div>
-    <div>조회수 : ${dto.viewcnt}    </div><br><br>
-    <div style="width:800px;">
-        <textarea id="content" name="content"
-rows="3" cols="80" 
-placeholder="내용을 입력하세요">${dto.content}</textarea></div><br><br>
+<tr>
+<div style="width:800px;">
+<td><textarea class="form-control" id="content" name="content" rows="3" cols="80" 
+placeholder="내용을 입력하세요">${dto.content}</textarea></td>
+</div>
+</tr>
+</tread>
+</table>
+
+</div>
+</div>
+
 </form>
 
 
@@ -168,14 +195,23 @@ CKEDITOR.replace("r_content",{
 	
 	<!-- 본인만 수정, 삭제 버튼을 표시한다. -->
 	<c:if test = "${sessionScope.user_id == dto.user_id or sessionScope.navername == dto.user_id or sessionScope.kakaonickname == dto.user_id or sessionScope.facebookname == dto.user_id}">
-			<button type = "submit" id = "btnUpdate">수정</button>
-			<button type = "button" id = "btnDelete">삭제</button>
+			<div class="btn-group btn-group-sm" role="group" aria-label="...">
+			<div style = "text-align:center;" >
+			
+			<button type = "submit" id = "btnUpdate" class="btn btn-default">수정</button>
+			<button type = "button" id = "btnDelete" class="btn btn-default">삭제</button>
+			
+			</div></div>
 	</c:if>
 	
 	
 	<!-- 관리자에게는 삭제 버튼을 표시한다. -->
 	<c:if test = "${sessionScope.admin_id != null}">
-			<button type = "button" id = "btnDelete">삭제</button>
+	
+	<div class="btn-group btn-group-sm" role="group" aria-label="...">
+	<div style = "text-align:center;" >
+			<button type = "button" id = "btnDelete" class="btn btn-default">삭제</button>
+			</div></div>
 	</c:if>
 	
 	
@@ -184,32 +220,51 @@ CKEDITOR.replace("r_content",{
 	or sessionScope.navername != null and sessionScope.navername != dto.user_id
 	or sessionScope.kakaonickname != null and sessionScope.kakaonickname != dto.user_id
 	or sessionScope.facebookname != null and sessionScope.facebookname != dto.user_id}">
-			<button type = "button" id = "btnRecommend">추천하기</button>
+	<div class="btn-group btn-group-sm" role="group" aria-label="...">
+	<div style = "text-align:center;" >
+	
+			<button type = "button" id = "btnRecommend" class="btn btn-default" >추천하기</button>
+			</div></div>
 	
 	</c:if>
 	
 	<!-- 관리자에게도 추천 버튼 출력 -->
 	<!-- 관리자에게는 삭제 버튼을 표시한다. -->
 	<c:if test = "${sessionScope.admin_id != null}">
-			<button type = "button" id = "btnRecommend">추천하기</button>
+	
+	<div class="btn-group btn-group-sm" role="group" aria-label="...">
+	<div style = "text-align:center;" >
+			<button type = "button" id = "btnRecommend" class="btn btn-default" >추천하기</button>
+			
+			</div></div>
 	</c:if>
 	
 	
 	<!-- 글목록은 본인이 아니어도 확인 가능하게 한다. -->
-	<button type = "button" id = "btnList">목록</button><br><br>
+		<div class="btn-group btn-group-sm" role="group" aria-label="...">
+	<div style = "text-align:center;" >
+	
+	<button type = "button" id = "btnList" class="btn btn-default">목록</button>
+	</div></div>
 	
 	<!-- 로그인이 되어있는 상태에서만 댓글 작성 버튼이 출력되도록 한다. -->
 	
 	<c:if test = "${sessionScope.user_id != null or sessionScope.navername != null 
 	or sessionScope.kakaonickname != null or sessionScope.facebookname != null}">
-	
-	<textarea rows = "5" cols = "80" id = "r_content" name = "r_content"></textarea>
+	<br><br><br>
+	<div class="btn-group btn-group-sm" role="group" aria-label="...">
+	<div style = "text-align:center;" >
+	<textarea rows = "5" cols = "80" id = "r_content" name = "r_content" class="form-control" aria-describedby="basic-addon1" placeholder="댓글을 입력하세요."></textarea>
+	</div></div>
 	<br>
 	
 	
 	<!-- 댓글쓰기 버튼을 클릭하면 위쪽에 있는 자바스크립트 구문이 실행되어서 컨트롤러로 맵핑됨 --><br><br>
+	<div class="btn-group btn-group-sm" role="group" aria-label="...">
+	<div style = "text-align:center;" >
 	
-	<button type = "button" id = "btnReply">댓글쓰기</button>
+	<button type = "button" id = "btnReply" class="btn btn-default" >댓글쓰기</button>
+	</div></div>
 	</c:if>
 	
 	<!-- 댓글 목록 -->
@@ -217,6 +272,5 @@ CKEDITOR.replace("r_content",{
 	<div id = "listReply"></div>
 	
 <body>
-<br><br><%@ include file="../include/Botton.jsp"%>
 </body>
 </html>

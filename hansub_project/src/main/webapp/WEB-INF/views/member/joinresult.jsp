@@ -14,25 +14,24 @@
 <br>
 <br>
 
-안녕하세요, ${user_id}님 <br><br>
+<span style="color: black; font-weight: bold;">안녕하세요,</span><span style="color: red; font-weight: bold;">${user_id}님 </span><br><br>
 <% System.getProperty("line.separator");%>
 <% System.getProperty("line.separator");%>
 
 
-환영합니다!!<br><br>
+<span style="color: black; font-weight: bold;">환영합니다!!</span><br><br>
 <% System.getProperty("line.separator");%>
 <% System.getProperty("line.separator");%>
 
 
-회원가입이 정상적으로 이루어 졌습니다.<br><br>
+<span style="color: black; font-weight: bold;">회원가입이 정상적으로 이루어 졌습니다.</span><br><br>
 <% System.getProperty("line.separator");%>
 <% System.getProperty("line.separator");%>
 
 
-로그인 하시면 홈페이지 내의 모든 서비스를 이용하실 수 있습니다.<br><br>
+<span style="color: black; font-weight: bold;">로그인 하시면 홈페이지 내의 모든 서비스를 이용하실 수 있습니다.</span><br><br>
 <% System.getProperty("line.separator");%>
 <% System.getProperty("line.separator");%>
 
-<br><br><%@ include file="../include/Botton.jsp"%>
 </body>
 </html>

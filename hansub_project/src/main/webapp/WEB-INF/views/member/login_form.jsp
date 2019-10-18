@@ -10,49 +10,50 @@
 <meta name = "viewport" content = "user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,
 width=device-width" />
 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <title>Insert title here</title>
+<link rel = "stylesheet" href = "/css/bootstrap.css">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
 
 </head>
 <br><br><%@ include file="../include/header.jsp"%>
 
-<table border="1" width="300">
+<section>
+<div style= "width:15%; float:left;">
+<table border="1" width="250px" class = "table-hover">
 
-<tr>
-<td>
-<br>
-<center>
-<span style="color:green; font-weight : bold;">회원 로그인</span>
-</center>
 
+		<div class="card align-middle" style="width:25rem; border-radius:20px;">
+		
+		<div class="card-body">
 
 <!-- 로그인창 -->
 <form action ="normale_login.do" method = "post">
 <center>
 <br>
-아이디 : <input type = "text" name="user_id" placeholder="  ID를 입력하세요 "><br><br>
-비밀번호 : <input type = "password" name="member_pass" placeholder="  비밀번호를 입력하세요 "><br><br>
-<button type = "submit" name = "submit" >로그인</button>
-
+<input type = "text" name="user_id" placeholder="  ID를 입력하세요 " class="form-control"><br><br>
+<input type = "password" name="member_pass" placeholder="  비밀번호를 입력하세요 " class="form-control"><br><br>
+<button type = "submit" name = "submit" class="form-control btn btn-primary">로그인</button>
 <br>
 <br>
-<div class = "row">
-	<div class="col-xs-8">
-		<div class="checkbox icheck">
-		<label>
-			<input type = "checkbox" name = "useCookie"> 로그인유지
-		</label>
-		</div>
-	</div>
-</div>
 </center>
 
 <center>
 
 <html lang="ko">
 <head>
-<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
+<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" width=200px, height=100px charset="utf-8"></script>
 </head>
 <body>
+
+
+
+
+
+
 <br>
 <!-- 네이버아이디로로그인 버튼 노출 영역 -->
 <div id="naverIdLogin"></div>
@@ -81,7 +82,7 @@ width=device-width" />
 
 <center>
 <!-- 카카오톡 아이디 연동해서 로그인 -->
-<script src = "//developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script src = "//developers.kakao.com/sdk/js/kakao.min.js" width=200px, height=100px ></script>
 <a id="kakao-login-btn"></a>
 <a href="http://developers.kakao.com/logout"></a>
 <script type='text/javascript'>
@@ -130,7 +131,7 @@ Kakao.Auth.createLoginButton({
 <!-- 페이스북 아이디를 연동해서 로그인 -->
 
  <center>
-<button type= "button" id= "loginBtn" ><img src="C:/img/facelogin.png"/>페이스북 로그인</button>
+<button type= "button" id= "loginBtn" ><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQwsKoAUt9rmyFjqv055BANDSiVlqNsu-kOF2NKwpGzOgWFwiqD" width=200px, height=50px /></button>
  </center>
 
             <div id="access_token"></div>
@@ -216,27 +217,41 @@ document.getElementById('loginBtn').addEventListener('click', function() {
 
 
 </form>
-
 <br>
 <!-- 아이디 찾기 -->
+<div style= "width:45%; float:left;">
 <form action ="find.user_id.do">
 <center>
-<button>아이디 찾기</button>
+<button class = "btn btn-default btn-block">아이디 찾기</button>
 </center>
 </form>
+</div>
 
-<br>
 <!-- 비밀번호 찾기 -->
+<div style= "width:45%; float:right;">
 <form action ="find.member_pass.do">
 <center>
-<button>비밀번호찾기</button>
+<button class = "btn btn-default btn-block">비밀번호 찾기</button>
+<br>
 </center>
 </form>
+<br>
+</div>
 <br>
 
 </td>
+<br>
 </tr>
+</div>
+
+<br>
+<br>
+</div>
+</div>
+</div>
 </table>
+</div>
+</section>
 
 
 <body>

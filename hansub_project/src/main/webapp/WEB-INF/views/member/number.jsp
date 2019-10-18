@@ -13,10 +13,9 @@
 
 
 
-문자보내기 실행 완료
+<span style="color: black; font-weight: bold;">문자보내기 실행 완료</span>
 
 
-<br><br><%@ include file="../include/Botton.jsp"%>
 
 </body>
 </html>

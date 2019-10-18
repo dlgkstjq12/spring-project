@@ -12,6 +12,23 @@
 <script src="${path}/ckeditor/ckeditor.js"></script>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<link href="bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+    #contentForm {
+      width: 40%;
+      margin: 0 auto;
+      padding-top: 12%;
+    }
+ 
+    .table > thead > tr > th, .table > tbody > tr > th {
+      background-color: #e6ecff;
+      text-align: center;
+    }
+  </style>
+
+
 <script>
 $(function(){
 	
@@ -21,8 +38,8 @@ $(function(){
 	});
 
 	
-//추천하기 버튼
-$("#btnRecommend").click(function(){
+	//추천하기 버튼
+	$("#btnRecommend").click(function(){
     if(confirm("해당 글을 추천하시겠습니까?")){
         document.form1.action="recommend.do";
         document.form1.submit();
@@ -30,10 +47,9 @@ $("#btnRecommend").click(function(){
         alert("해당 글을 추천하였습니다.")
         
     	}
+    
 	});
 
-	
-	
 });
 
 
@@ -43,20 +59,35 @@ $("#btnRecommend").click(function(){
 <h2>베스트 게시물 보기</h2>
 <!-- 게시물을 작성하기 위해 컨트롤러의 insert.do로 맵핑 -->
 <form id="form1" name="form1" method="post" action="${path}/board/insert.do">
-<input type = "hidden" id = "member_bno" name = "member_bno" value = "${dto.member_bno }">
-    <div>제목 <input name="title" id="title" size="80"
-                    value="${dto.title}"
-                    placeholder="제목을 입력하세요"><br><br>
+<div class="input-group input-group-sm" role="group" style = "text-align:left">
+<table class="table table-striped table-bordered">
+<tread>
+
+<tr>
+<td><input type = "hidden" id = "member_bno" name = "member_bno" value = "${dto.member_bno }">글번호 : ${dto.member_bno }</td>
+</tr>
+
+<tr>
+<td>
+<input name="title" id="title" size="80" value="${dto.title}" class="form-control" aria-describedby="basic-addon1" placeholder="제목을 입력하세요">
+</td>
+</tr>
+
+<br><br>
+
 <!-- placeholder은 제목을 입력할 수 있도록 도움말을 출력함 -->
-    </div>
-    <div>조회수 : ${dto.viewcnt}    </div><br><br>
+   <tr>
+   <td>조회수 : ${dto.viewcnt}</td>
+   </tr>
+   
+ <tr>
     <div style="width:800px;">
-        <textarea id="content" name="content"
+        <td><textarea id="content" name="content"
 rows="3" cols="80" 
-placeholder="내용을 입력하세요">${dto.content}</textarea></div><br><br>
+placeholder="내용을 입력하세요" class="form-control" aria-describedby="basic-addon1">${dto.content}</textarea></td></div></div></tr>
 </form>
 
-
+</table>
  
 <!-- 마찬가지로 내용을 입력하도록 도움말을 출력함 -->
 <script>
@@ -78,7 +109,9 @@ CKEDITOR.replace("r_content",{
 
 	<!-- 관리자에게는 삭제 버튼을 표시한다. -->
 	<c:if test = "${sessionScope.admin_id != null}">
-			<button type = "button" id = "btnDelete">삭제</button>
+	<div class="btn-group btn-group-sm" role="group" aria-label="...">
+	<div style = "text-align:center;" >
+			<button type = "button" id = "btnDelete" class="btn btn-default">삭제</button>
 	</c:if>
 	
 	
@@ -87,21 +120,32 @@ CKEDITOR.replace("r_content",{
 	or sessionScope.navername != null and sessionScope.navername != dto.user_id
 	or sessionScope.kakaonickname != null and sessionScope.kakaonickname != dto.user_id
 	or sessionScope.facebookname != null and sessionScope.facebookname != dto.user_id}">
-			<button type = "button" id = "btnRecommend">추천하기</button>
+	<div class="btn-group btn-group-sm" role="group" aria-label="...">
+	<div style = "text-align:center;" >
+			
+	<button type = "button" id = "btnRecommend" class="btn btn-default">추천하기</button>
 	
 	</c:if>
 	
 	<!-- 관리자에게도 추천 버튼 출력 -->
 	<!-- 관리자에게는 삭제 버튼을 표시한다. -->
 	<c:if test = "${sessionScope.admin_id != null}">
-			<button type = "button" id = "btnRecommend">추천하기</button>
+	<div class="btn-group btn-group-sm" role="group" aria-label="...">
+	<div style = "text-align:center;" >
+			<button type = "button" id = "btnRecommend" class="btn btn-default" >추천하기</button>
 	</c:if>
 	
 	
 	<!-- 글목록은 본인이 아니어도 확인 가능하게 한다. -->
-	<button type = "button" id = "btnList">목록</button><br><br>
+	
+	<div class="btn-group btn-group-sm" role="group" aria-label="...">
+	<div style = "text-align:center;" >
+	<button type = "button" id = "btnList" class="btn btn-default">목록</button>
+	</div>
+	</div>
+	</tr>
+
 	
 <body>
-<br><br><%@ include file="../include/Botton.jsp"%>
 </body>
 </html>

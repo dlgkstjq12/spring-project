@@ -9,6 +9,66 @@
 <%@ include file="../include/menu.jsp"%>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
+<link rel = "stylesheet" href = "/css/bootstrap.css">
+
+  <style>
+    #container {
+      width: 70%;
+      margin: 0 auto;     /* 가로로 중앙에 배치 */
+      padding-top: 10%;   /* 테두리와 내용 사이의 패딩 여백 */
+    }
+     
+    #list {
+      text-align: center;
+    }
+   
+    #write {
+      text-align: right;
+    }
+     
+    /* Bootstrap 수정 */
+    .table > thead {
+      background-color: #b3c6ff;
+    }
+    .table > thead > tr > th {
+      text-align: center;
+    }
+    .table-hover > tbody > tr:hover {
+      background-color: #e6ecff;
+    }
+    .table > tbody > tr > td {
+      text-align: center;
+    }
+    .table > tbody > tr > #title {
+      text-align: left;
+    }
+     
+    div > #paging {
+      text-align: center;
+    }
+     
+    .hit {
+      animation-name: blink;
+      animation-duration: 1.5s;
+      animation-timing-function: ease;
+      animation-iteration-count: infinite;
+      /* 위 속성들을 한 줄로 표기하기 */
+      /* -webkit-animation: blink 1.5s ease infinite; */
+    }
+     
+    /* 애니메이션 지점 설정하기 */
+    /* 익스플로러 10 이상, 최신 모던 브라우저에서 지원 */
+    @keyframes blink {
+      from {color: white;}
+      30% {color: yellow;}
+      to {color: red; font-weight: bold;}
+      /* 0% {color:white;}
+      30% {color: yellow;}
+      100% {color:red; font-weight: bold;} */
+    }
+  </style>
+
+
 <script>
 //게시판 목록 페이지로 이동하게 하는 함수
 function list(page){
@@ -19,57 +79,88 @@ function list(page){
 </script>
 
 
-
 <%@ include file="../include/login.jsp"%><br>
+
 	
 
+<div style= "width:80%; float:right;">
+<div id = "list">
+<span style="color: green; font-weight: bold;"><d>베스트 게시물 게시판</d></span>
+</div>
 
+<div>
+<!-- 해당 table 클래스는 마우스를 올려놓았을때 게시글의 색깔이 파란색으로 변하도록 하는 클래스 -->
+<table class="table table-striped table table-hover">
 <center>
-<h2>베스트 게시물 게시판</h2>
-<table border = "1" width = "800px" align = "top">
-<center>
+<thead>
 	<tr>
-		
-		<th>추천수 순위</th>
-		<th>회원 게시글 번호</th>
-		<th>제목</th>
-		<th>작성자</th>
-		<th>내용</th>
-		<th>날짜</th>
-		<th>조회수</th>
-		<th>추천수</th>
-
+	
+	
+	<!-- width옆에 %는 테이블에서 차지할 비율을 나타낸것 -->
+		<th width="5%"><span style="color: green; font-weight: bold;">추천수 순위</span></th>
+		<th width="5%">게시글 번호</th>
+		<th width="15%">제목</th>
+		<th width="10%">작성자</th>
+		<th width="15%">내용</th>
+		<th width="10%">날짜</th>
+		<th width="5%">조회수</th>
+		<th width="5%">추천수</th>
+	</tr>
+	</thead>
+	<tbody>
 		
 	<!-- forEach var = "개별데이터" items = "집합데이터" -->
-	<c:forEach var = "row" items = "${map.list}"> <!-- 컨트롤러에서 map안에 list를 넣었기 때문에 이렇게 받는다. -->
+	<c:forEach var = "row" items = "${map.list}" varStatus="status"> <!-- 컨트롤러에서 map안에 list를 넣었기 때문에 이렇게 받는다. -->
 	<tr>
-		<td>${row.rk}</td>	<!-- 게시글 순위 -->
-		<td>${row.member_bno}</td>	<!-- 글번호 -->
-		<!-- 클릭하면 컨트롤러의 view.do로 이동하고, 게시물번호, 페이지 번호, 검색옵션, 키워드를 같이 넘긴다 -->
+	
 		<td>
+		<center>
+		<!-- hit를 사용해서 추천수 상위 1~3위 까지는 순위 애니메이션이 출력되도록 함 -->
+		<c:if test="${row.rk <= 3 }">
+			<span class = "hit" size = "7">${row.rk}위!!</span>
+		</c:if>
+		
+		
+		<!-- hit를 사용해서 추천수 상위 1~3위 까지는 이달의 추천글 애니메이션이 출력되도록 함 -->
+		<c:if test="${row.rk >= 4 }">
+			<span class = "hit" size = "4">이달의 추천글!!</span>
+		</c:if>
+		
+		</font>
+		</center>
+		</td>	<!-- 게시글 순위 -->
+		
+		
+		<td><center>${row.member_bno}</center></td>	<!-- 글번호 -->
+		<!-- 클릭하면 컨트롤러의 view.do로 이동하고, 게시물번호, 페이지 번호, 검색옵션, 키워드를 같이 넘긴다 -->
+		
+		<!-- 조회수가 50이 넘는 글은 제목옆에 hit라는 애니메이션이 출력되도록 함 -->
+	<td id ="title">
 		<a href="best_board_view.do?member_bno=${row.member_bno}">${row.title}</a>
-<c:if test="${row.rcnt > 0}"> 
-   <span style="color:red;">( ${row.rcnt} )</span> 
-</c:if>  
+		<c:if test="${row.viewcnt >= 50 }">
+			<span class = "hit">hit!!</span>
+		</c:if>
 </td>
 
 		<td>${row.user_id}</td>	<!-- 작성자의 이름 -->
 		<td>${row.content}</td>	<!-- 글의내용 -->
 		<td>${row.reg_date}</td>	<!-- 날짜의 출력형식을 변경함 -->
-		<td>${row.viewcnt}</td>	<!-- 조회수 -->
-		<td>${row.recommend}</td>	<!-- 추천수 -->
+		<td><center>${row.viewcnt}</center></td>	<!-- 조회수 -->
+		<td><center>${row.recommend}</center></td>	<!-- 추천수 -->
 
 
 	
 	</tr>
 	</c:forEach>
-	
+	</tbody>
 
 </table>
-
-
+</div>
+<center>
 <form name="form1" method="post" action="list.do">
-    <select name="search_option">
+<div class = "search row" style = "margin:auto;">
+	<div class = "col-xs-2 col-sm-2" style = "margin:auto;">
+    <select name="search_option" class = "form-control" align = "center">
         <option value="user_id"
 <c:if test="${map.search_option == 'user_id'}">selected</c:if>
         >작성자</option>
@@ -82,16 +173,21 @@ function list(page){
         <option value="all" 
 <c:if test="${map.search_option == 'all'}">selected</c:if>
         >작성자+내용+제목</option>
-    </select>
-    <input name="keyword" value="${map.keyword}">
-    <input type="submit" value="조회">
-   
+    </select>   
+    </div>
+    
+    <div class = "col-xs-2 col-sm-2" style = "margin:auto;">
+	<div class = "input-group" style = "margin:auto;">
+    <input name="keyword" value="${map.keyword}" class = "form-control" style="width:300px;" align = "center"></div></div>
+    <input type="submit" value="조회" class = "btn btn-default" align = "center">
+  </div>  
+  </div>
+  </center>
 </form>
 
- 
+ </div>
 
 
 </center>
-<br><br><%@ include file="../include/Botton.jsp"%>
 </body>
 </html>

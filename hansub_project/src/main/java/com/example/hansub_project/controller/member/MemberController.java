@@ -62,6 +62,7 @@ import com.example.hansub_project.model.member.dto.MemberDTO;
 	private static final String String = null;
 	
 	
+	
 		// mailSending 코드 (회원가입시 이메일 인증 메소드.)
 		@RequestMapping( value = "/member/auth.do{e_mail}" , method=RequestMethod.POST )
 		public ModelAndView mailSending(HttpServletRequest request, @PathVariable String e_mail , HttpServletResponse response_email) throws IOException {
@@ -218,8 +219,6 @@ import com.example.hansub_project.model.member.dto.MemberDTO;
 	}
 	
 	
-	
-	
 	//이메일 인증 페이지 맵핑 메소드
 	@RequestMapping("/member/email.do")
 	public String email() {
@@ -288,7 +287,7 @@ import com.example.hansub_project.model.member.dto.MemberDTO;
 	
 	
 			// mailSending 코드 (메인페이지에서 메일을 보낼때 맵핑되는 메소드)
-			@RequestMapping(value = "e_mailForm.do" , method=RequestMethod.POST )
+			@RequestMapping(value = "/member/e_mailForm.do" , method=RequestMethod.POST )
 			public ModelAndView main_mailSending(HttpServletRequest request, String sender_front, String sender_back, 
 			String recipient_front, String recipient_back, String title, String text, HttpServletResponse response_email) throws IOException {
 				
@@ -386,8 +385,37 @@ import com.example.hansub_project.model.member.dto.MemberDTO;
 	
 	
 	
+	
+	
+	
 	//로그인을 체크하는 메소드 (로그인이 성공하면 로그인 결과 페이지로 이동하고, 실패하면 다시 로그인 페이지로 이동한다.)
 	  @RequestMapping("normale_login.do") public ModelAndView login (String user_id, String
+	  member_pass, HttpSession session) throws Exception{
+	  
+		  //로그인 체크를 위해 id와 비밀번호를 dto에 저장
+	  MemberDTO dto = new MemberDTO(); 
+	  dto.setUser_id(user_id);
+	  dto.setMember_pass(member_pass); 
+	  
+	  
+	  boolean result = memberservice.loginCheck(dto, session); 
+	  ModelAndView mav = new ModelAndView();
+	  
+	  if(result) { //로그인 성공 (result값이 참일때 실행되는 구문) 
+	  mav.setViewName("home");//뷰의이름
+	  mav.addObject("user_id", session.getAttribute(user_id));
+	  
+	  }else if(session.getAttribute(user_id)==null) { //로그인 실패
+	  mav.setViewName("home"); 
+	  //뷰에 전달할 값 
+	 
+	  mav.addObject("message","회원가입된 회원의 아이디 혹은 비밀번호가 일치하지 않습니다."); 
+	  } 
+	  	return mav; 
+	}
+	  
+	//로그인을 체크하는 메소드 (로그인이 성공하면 로그인 결과 페이지로 이동하고, 실패하면 다시 로그인 페이지로 이동한다.)
+	  @RequestMapping("/member/normale_login.do") public ModelAndView member_login (String user_id, String
 	  member_pass, HttpSession session) throws Exception{
 	  
 		  //로그인 체크를 위해 id와 비밀번호를 dto에 저장
@@ -424,9 +452,17 @@ import com.example.hansub_project.model.member.dto.MemberDTO;
 			
 			return "home";
 		}
+	
+		//일반 로그아웃 메소드
+				@RequestMapping("/member/logout.do")
+				public String member_logout(HttpSession session, HttpServletRequest request) {
+					
+					//세션에 담긴값 초기화
+					session.invalidate();
+					
+					return "home";
+				}	
 		
-		
-				
 	
 	  
 	//네이버 관련 로그아웃 메소드
@@ -517,6 +553,18 @@ import com.example.hansub_project.model.member.dto.MemberDTO;
 	}
 	
 	
+	//회원관련 페이지에서 아이디 찾기 페이지로 이동
+	@RequestMapping("/member/find.user_id.do")
+	public String member_finduser_id() {
+		return "member/find_user_id";
+	}
+	
+	
+	//회원관련 페이지에서 비밀번호 찾기 페이지로 이동
+	@RequestMapping("/member/find.member_pass.do")
+	public String member_findmember_pass() {
+		return "member/find_member_pass";
+	}
 	
 	
 	
@@ -715,7 +763,7 @@ import com.example.hansub_project.model.member.dto.MemberDTO;
 		
 		
 		//문자를 보낼때 맵핑되는 메소드
-		@RequestMapping(value = "/sendSms.do")
+		@RequestMapping(value = "/member/sendSms.do")
 		  public String sendSms(HttpServletRequest request) throws Exception {
 
 		    String api_key = "NCS0VWZPZQPVXEXX";
@@ -981,5 +1029,17 @@ import com.example.hansub_project.model.member.dto.MemberDTO;
 					return mv;
 				}
 		
+			//문자보내기 페이지로 이동함
+			@RequestMapping("/member/smsform.do")
+			public String smsform() {
+				return "member/smsform";
+			}
+			
+			
+			//이메일보내기 페이지로 이동함
+			@RequestMapping("/member/e_mailform.do")
+			public String e_mailform() {
+				return "member/e_mailform";
+			}
 	
 }
